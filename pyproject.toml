@@ -11,9 +11,31 @@ dependencies = [
     "qrcode[pil] (>=8.2,<9.0)",
     "pillow (>=11.3.0,<12.0.0)"
 ]
+classifiers=[
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Office/Business :: Financial",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+]
 
 [tool.poetry]
 packages = [{include = "pixcore", from = "src"}]
+
+[tool.poetry.urls]
+"Documentação" = "https://gustjose.github.io/pixcore/"
+"Repositório" = "https://github.com/gustjose/pixcore"
+"Bug Tracker" = "https://github.com/gustjose/pixcore/issues"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -47,3 +69,4 @@ run = ""
 docs = "mkdocs serve"
 lint = "blue --diff . && isort --diff ."
 test = "pytest tests/"
+publish = "mkdocs gh-deploy"
