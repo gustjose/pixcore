@@ -1,0 +1,720 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../2.%20Tutorial/">
+      
+      
+        <link rel="next" href="../4.%20Sobre/">
+      
+      
+      <link rel="icon" href="../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>3. Como Contribuir - PixCore</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-como-contribuir" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="PixCore" class="md-header__button md-logo" aria-label="PixCore" data-md-component="logo">
+      
+  <img src="../assets/Icon-pixcore.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PixCore
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Como Contribuir
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gustjose/pixcore" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gustjose/pixcore
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PixCore" class="md-nav__button md-logo" aria-label="PixCore" data-md-component="logo">
+      
+  <img src="../assets/Icon-pixcore.png" alt="logo">
+
+    </a>
+    PixCore
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gustjose/pixcore" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gustjose/pixcore
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bem-vindo ao PixCore
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20In%C3%ADcio%20R%C3%A1pido/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Início Rápido
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20Tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Tutorial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3. Como Contribuir
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Como Contribuir
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-contribuicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Contribuição
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-o-ambiente-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando o Ambiente de Desenvolvimento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-de-trabalho-para-contribuicao-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fluxo de Trabalho para Contribuição de Código
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo-de-conduta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código de Conduta
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20Sobre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Sobre
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Api
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Api
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/Constantes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Constantes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/Modelos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Modelos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/Payload%20Pix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Payload Pix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/Utilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Utilidades
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-contribuicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Contribuição
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-o-ambiente-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando o Ambiente de Desenvolvimento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-de-trabalho-para-contribuicao-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fluxo de Trabalho para Contribuição de Código
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo-de-conduta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código de Conduta
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="3-como-contribuir">3. Como Contribuir</h1>
+<p>Ficamos muito felizes com seu interesse em contribuir com o <strong>PixCore</strong>! Toda contribuição, não importa o tamanho, é bem-vinda e valorizada.</p>
+<p>Este guia fornecerá tudo que você precisa para começar a colaborar com o projeto, seja reportando um bug, sugerindo uma nova funcionalidade ou escrevendo código.</p>
+<hr />
+<h2 id="tipos-de-contribuicao">Tipos de Contribuição</h2>
+<p>Existem muitas maneiras de contribuir, e todas são importantes:</p>
+<ul>
+<li>🐞 <strong>Reportando Bugs:</strong> Se você encontrou um comportamento inesperado ou um erro, abra uma <a href="https://github.com/gustjose/pixcore/issues">Issue</a> detalhando o problema.</li>
+<li>💡 <strong>Sugerindo Melhorias ou Novas Funcionalidades:</strong> Tem uma ideia para tornar o PixCore ainda melhor? Adoraríamos ouvi-la! Crie uma <a href="https://github.com/gustjose/pixcore/issues">Issue</a> para descrever sua sugestão.</li>
+<li>📖 <strong>Melhorando a Documentação:</strong> Se você encontrou um erro de digitação, uma explicação confusa ou acredita que uma seção pode ser melhorada, sinta-se à vontade para propor alterações.</li>
+<li>💻 <strong>Escrevendo Código:</strong> Você pode corrigir um bug existente ou implementar uma nova funcionalidade.</li>
+</ul>
+<hr />
+<h2 id="configurando-o-ambiente-de-desenvolvimento">Configurando o Ambiente de Desenvolvimento</h2>
+<p>Para garantir que você tenha um ambiente de desenvolvimento limpo e consistente, o projeto utiliza <strong>Poetry</strong> para gerenciar dependências e ambientes virtuais.</p>
+<p>Siga os passos abaixo para configurar seu ambiente local:</p>
+<ol>
+<li>
+<p><strong>Faça um Fork do Repositório</strong>
+    Clique no botão "Fork" no canto superior direito da página do <a href="https://github.com/gustjose/pixcore">repositório no GitHub</a>.</p>
+</li>
+<li>
+<p><strong>Clone o seu Fork</strong>
+    Em seu terminal, clone o repositório que você acabou de "forkar":
+    <code>bash
+    git clone [https://github.com/gustjose/pixcore.git](https://github.com/gustjose/pixcore.git)
+    cd pixcore</code></p>
+</li>
+<li>
+<p><strong>Instale as Dependências com Poetry</strong>
+    Se você ainda não tem o Poetry, <a href="https://python-poetry.org/docs/#installation">siga as instruções de instalação</a>. Com o Poetry instalado, execute o comando abaixo para instalar todas as dependências do projeto, incluindo as de desenvolvimento (<code>pytest</code>, <code>black</code>, etc.):
+    <code>bash
+    poetry install</code></p>
+</li>
+<li>
+<p><strong>Ative o Ambiente Virtual</strong>
+    Para ativar o ambiente virtual gerenciado pelo Poetry, utilize o comando:
+    <code>bash
+    poetry shell</code>
+    Agora você está pronto para começar a codificar!</p>
+</li>
+</ol>
+<hr />
+<h2 id="fluxo-de-trabalho-para-contribuicao-de-codigo">Fluxo de Trabalho para Contribuição de Código</h2>
+<ol>
+<li><strong>Crie uma Nova Branch</strong>
+    Sempre trabalhe em uma nova branch para manter o histórico organizado. Escolha um nome descritivo para ela.</li>
+</ol>
+<pre><code class="language-bash"># Exemplo para uma nova funcionalidade
+git checkout -b feature/adiciona-suporte-a-campo-x
+
+# Exemplo para uma correção de bug
+git checkout -b fix/corrige-calculo-crc16
+</code></pre>
+<ol>
+<li>
+<p><strong>Escreva seu Código</strong>
+    Faça as alterações ou adições necessárias no código. Lembre-se de seguir o estilo e a arquitetura existentes.</p>
+</li>
+<li>
+<p><strong>Garanta a Qualidade do Código</strong>
+    Antes de submeter sua contribuição, rode as ferramentas de qualidade para formatar e verificar seu código.</p>
+</li>
+</ol>
+<pre><code class="language-bash">task lint
+</code></pre>
+<ol>
+<li><strong>Execute os Testes</strong>
+    É fundamental que todos os testes passem antes de você criar um Pull Request. Adicione novos testes se você estiver implementando uma nova funcionalidade.</li>
+</ol>
+<pre><code class="language-bash">task test
+</code></pre>
+<ol>
+<li><strong>Envie seu Pull Request (PR)</strong>
+    Após fazer o commit das suas alterações, envie-as para o seu fork e abra um Pull Request para a branch <code>main</code> do repositório original.</li>
+</ol>
+<pre><code class="language-bash">git push origin nome-da-sua-branch
+</code></pre>
+<p>Ao abrir o PR, forneça um título claro e uma descrição detalhada do que foi feito. Se sua alteração resolve uma Issue existente, mencione-a na descrição (ex: <code>Resolve #123</code>).</p>
+<hr />
+<h2 id="codigo-de-conduta">Código de Conduta</h2>
+<p>Embora ainda não tenhamos um arquivo formal de Código de Conduta, pedimos que todas as interações neste projeto (issues, pull requests, etc.) sejam feitas de forma respeitosa, construtiva e amigável.</p>
+<p><strong>Obrigado por dedicar seu tempo e talento ao PixCore!</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>
