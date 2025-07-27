@@ -1,0 +1,35 @@
+name: Publicar Pacote no PyPI
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-publish:
+    name: Construir e Publicar no PyPI
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    environment:
+      name: release
+      url: https://pypi.org/p/pixcore
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar Poetry
+        run: pipx install poetry
+
+      - name: Sincronizar versão do pacote com a tag
+        run: poetry version ${{ github.ref_name }}
+
+      - name: Construir o pacote
+        run: poetry build
+
+      - name: Publicar no PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
