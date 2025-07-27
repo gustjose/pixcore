@@ -5,6 +5,17 @@ from PIL import Image
 import qrcode
 
 class Pix:
+    """
+    Classe principal para a geração do payload e do QR Code para pagamentos Pix.
+
+    Esta classe encapsula toda a lógica necessária para criar um BR Code Pix
+    em conformidade com as especificações do Banco Central do Brasil.
+    Permite a geração do payload em formato string e a criação de uma imagem
+    de QR Code customizável.
+
+    Parameters:
+        pix_data (PixData): Objeto do tipo PixData contendo todas as informações necessárias para a geração do Pix.
+    """
     def __init__(self, pix_data: PixData):
         self.pix_data = pix_data
 
@@ -35,7 +46,22 @@ class Pix:
         return utils.format_tlv(const.ID_MERCHANT_INFO_LANGUAGE_TEMPLATE, "".join(parts))
 
     def payload(self) -> str:
-        """Gera o payload completo do BR Code no formato TLV."""
+        """
+        Gera o payload completo do BR Code no formato TLV (Copia e Cola).
+
+        O payload é a string que será codificada no QR Code, contendo todas as
+        informações da transação formatadas segundo o padrão EMV® QRCPS.
+
+        Returns:
+            str: O payload completo e formatado, incluindo o CRC16.
+
+        Examples:
+            >>> pix_data = PixData(...)
+            >>> pix_generator = Pix(pix_data)
+            >>> br_code = pix_generator.payload()
+            >>> print(br_code)
+            '00020126580014br.gov.bcb.pix0136123e4567-e89b-12d3-a456-426655440000520400005303986540510.005802BR5913NOME DO LOJA6008SAO PAULO62290525txid-gerado-pelo-sistema63041A29'
+        """
         payload_parts = [
             utils.format_tlv(const.ID_PAYLOAD_FORMAT_INDICATOR, const.PAYLOAD_FORMAT_INDICATOR_VALUE),
         ]
@@ -76,7 +102,18 @@ class Pix:
     
     def qrcode(self, caminho_logo: str = None, cor_qr: str = "black", cor_fundo: str = "white") -> Image.Image:
         """
-        Gera e retorna um objeto de imagem (Pillow) do QR Code.
+        Gera um objeto de imagem (Pillow) do QR Code a partir do payload.
+
+        Args:
+            caminho_logo (str, optional): O caminho para um arquivo de imagem (ex: .png)
+                                          a ser centralizado no QR Code. Defaults to None.
+            cor_qr (str, optional): A cor dos módulos do QR Code. Pode ser um nome de cor
+                                    (ex: "navy") ou um código hexadecimal (ex: "#000080").
+                                    Defaults to "black".
+            cor_fundo (str, optional): A cor de fundo do QR Code. Defaults to "white".
+
+        Returns:
+            Image.Image: Um objeto de imagem da biblioteca Pillow contendo o QR Code.
         """
         payload_str = self.payload()
         
@@ -111,6 +148,20 @@ class Pix:
     def save_qrcode(self, caminho_arquivo_saida: str, caminho_logo: str = None, cor_qr: str = "black", cor_fundo: str = "white"):
         """
         Gera e salva a imagem do QR Code diretamente em um arquivo.
+
+        Args:
+            caminho_arquivo_saida (str): O caminho e nome do arquivo onde a imagem
+                                         do QR Code será salva (ex: 'output/pix.png').
+            caminho_logo (str, optional): O caminho para um arquivo de imagem a ser
+                                          centralizado no QR Code. Defaults to None.
+            cor_qr (str, optional): A cor dos módulos do QR Code. Defaults to "black".
+            cor_fundo (str, optional): A cor de fundo do QR Code. Defaults to "white".
+        
+        Examples:
+            >>> pix_data = PixData(...)
+            >>> pix_generator = Pix(pix_data)
+            >>> pix_generator.save_qrcode("meu_pix_qr.png", caminho_logo="logo.png")
+            QR Code salvo com sucesso em: meu_pix_qr.png
         """
         imagem_qr = self.qrcode(caminho_logo=caminho_logo, cor_qr=cor_qr, cor_fundo=cor_fundo)
         imagem_qr.save(caminho_arquivo_saida)

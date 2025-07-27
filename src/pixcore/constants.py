@@ -1,3 +1,13 @@
+"""
+Módulo de Constantes para o BR Code Pix.
+
+Este arquivo centraliza todos os identificadores (IDs/Tags) e valores fixos
+utilizados na construção do payload do BR Code, conforme as especificações
+do padrão EMV® Merchant Presented Mode (MPM) utilizado pelo Pix.
+
+A centralização desses valores facilita a manutenção e garante consistência
+na geração do código.
+"""
 # ==============================================================================
 # IDs de Campos (Tags) do Payload Principal do BR Code (EMV® MPM)
 # Organizados em ordem numérica.

@@ -5,8 +5,58 @@ import re
 @dataclass
 class PixData:
     """
-    Representa todos os dados para a geração de um BR Code PIX,
-    incluindo campos obrigatórios e opcionais do padrão EMV®.
+    Representa e valida todos os dados para a geração de um BR Code Pix.
+
+    Esta dataclass serve como um contêiner estruturado para os campos
+    obrigatórios e opcionais do padrão EMV® QRCPS, aplicando validações
+    automáticas na inicialização do objeto para garantir a conformidade
+    e integridade dos dados.
+
+    Attributes:
+        recebedor_nome (str): Nome do recebedor/comerciante (até 25 caracteres).
+        recebedor_cidade (str): Cidade do recebedor/comerciante (até 15 caracteres).
+        pix_key (str): Chave Pix do recebedor (e-mail, CPF/CNPJ, celular ou chave aleatória). Máximo de 77 caracteres.
+        valor (Optional[float]): O valor da transação. Se for `None`, o QR Code será gerado sem valor fixo,
+                                 permitindo que o pagador insira o valor.
+        transacao_id (str): Identificador da transação (TXID). Deve ter entre 1 e 25 caracteres alfanuméricos.
+                            O padrão '***' indica que não é utilizado.
+        ponto_iniciacao_metodo (Optional[str]): Define se o QR Code é estático ('12') ou dinâmico ('11').
+                                                Se `None`, o campo não é incluído no payload.
+        receptor_categoria_code (str): Código da categoria do comerciante ("Merchant Category Code" - MCC).
+                                       Padrão: "0000".
+        recebedor_cep (Optional[str]): CEP do comerciante, deve conter 8 dígitos.
+        info_adicional (Optional[str]): Campo de texto livre para informações adicionais (não usado diretamente
+                                        na geração padrão do BR Code, mas pode ser útil para o sistema).
+        idioma_preferencia (Optional[str]): Idioma para dados alternativos (ex: "PT").
+        recebedor_nome_alt (Optional[str]): Nome alternativo do recebedor (em outro idioma).
+        recebedor_cidade_alt (Optional[str]): Cidade alternativa do recebedor (em outro idioma).
+
+    Raises:
+        ValueError: Se qualquer um dos campos obrigatórios não atender às regras
+                    de validação (ex: comprimento, formato).
+
+    Examples:
+        Criando uma instância válida de PixData:
+        >>> dados_validos = PixData(
+        ...     recebedor_nome="EMPRESA MODELO",
+        ...     recebedor_cidade="SAO PAULO",
+        ...     pix_key="123e4567-e89b-12d3-a456-426655440000",
+        ...     valor=10.50,
+        ...     transacao_id="TXID12345"
+        ... )
+        >>> print(dados_validos.recebedor_nome)
+        EMPRESA MODELO
+
+        Tentando criar uma instância com dados inválidos:
+        >>> try:
+        ...     dados_invalidos = PixData(
+        ...         recebedor_nome="NOME EXTREMAMENTE LONGO QUE EXCEDE O LIMITE",
+        ...         recebedor_cidade="SAO PAULO",
+        ...         pix_key="chave-pix"
+        ...     )
+        ... except ValueError as e:
+        ...     print(e)
+        O nome do recebedor (recebedor_nome) é obrigatório e deve ter até 25 bytes.
     """
 
     recebedor_nome: str

@@ -6,8 +6,8 @@ edit_uri: tree/main/docs
 theme:
   name: material
   language: pt-BR
-  # logo: assets/logo.png
-  # favicon: assets/favicon.ico
+  logo: assets/Icon-pixcore.png
+  favicon: assets/favicon.ico
 
 markdown_extensions:
   - attr_list
@@ -16,7 +16,12 @@ extra_css:
   - stylesheets/extra.css
 
 plugins:
+- macros
 - mkdocstrings:
     handlers:
       python:
         paths: [src]
+
+extra:
+  comandos:
+    test: pytest
