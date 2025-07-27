@@ -1,0 +1,16 @@
+site_name: PixCore
+repo_url: https://github.com/gustjose/pixcore
+repo_name: gustjose/pixcore
+edit_uri: tree/main/docs
+
+theme:
+  name: material
+  language: pt-BR
+  # logo: assets/logo.png
+  # favicon: assets/favicon.ico
+
+markdown_extensions:
+  - attr_list
+
+extra_css:
+  - stylesheets/extra.css
