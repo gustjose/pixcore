@@ -30,6 +30,6 @@ def test_transacao_id_com_valor_padrao():
     instance = PixData(
         recebedor_nome="Recebedor",
         recebedor_cidade="Cidade",
-        pix_key="chavepix"
+        pix_key="chavepix123"
     )
     assert instance.transacao_id == "***"
