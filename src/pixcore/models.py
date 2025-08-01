@@ -74,16 +74,16 @@ class PixData:
 
     def __post_init__(self):
         
-        if not self.recebedor_nome or len(self.recebedor_nome.encode('utf-8')) > 25:
-            raise ValueError("O nome do recebedor (recebedor_nome) é obrigatório e deve ter até 25 bytes.")
+        if not self.recebedor_nome or len(self.recebedor_nome.encode('utf-8')) > 25 or len(self.recebedor_nome) < 3:
+            raise ValueError("O nome do recebedor (recebedor_nome) é obrigatório e deve ter entre 3 e 25 bytes.")
             
-        if not self.recebedor_cidade or len(self.recebedor_cidade.encode('utf-8')) > 15:
-            raise ValueError("A cidade do recebedor (recebedor_cidade) é obrigatória e deve ter até 15 bytes.")
+        if not self.recebedor_cidade or len(self.recebedor_cidade.encode('utf-8')) > 15 or len(self.recebedor_cidade) < 3:
+            raise ValueError("A cidade do recebedor (recebedor_cidade) é obrigatória e deve ter entre 3 e 15 bytes.")
 
         if self.transacao_id != '***' and not re.match(r'^[a-zA-Z0-9]{1,25}$', self.transacao_id):
             raise ValueError("O ID da Transação (transacao_id) deve ser alfanumérico com até 25 caracteres.")
 
-        if not self.pix_key or len(self.pix_key) > 77:
+        if not self.pix_key or len(self.pix_key) > 77 or len(self.pix_key) < 10: 
             raise ValueError("A chave Pix (pix_key) é obrigatória e deve ter até 77 caracteres.")
 
         if self.valor is not None and self.valor <= 0:
