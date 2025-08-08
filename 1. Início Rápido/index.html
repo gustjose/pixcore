@@ -26,6 +26,9 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
       
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
       
 
 
@@ -57,7 +60,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -108,10 +118,78 @@
       </div>
     </div>
     
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
     
     
       <div class="md-header__source">
@@ -602,8 +680,8 @@
 <hr />
 <h2 id="passo-1-instalacao"><strong>Passo 1</strong>: Instalação</h2>
 <p>Primeiro, certifique-se de que a biblioteca esteja instalada. Se ainda não a instalou, utilize o pip:</p>
-<pre><code class="language-bash">pip install pixcore
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>pixcore
+</span></code></pre></div>
 <p>Isso instalará o pixcore e suas dependências necessárias, como qrcode e Pillow.</p>
 <h2 id="passo-2-importando-as-classes-principais"><strong>Passo 2</strong>: Importando as Classes Principais</h2>
 <p>Para começar, você precisará importar duas classes centrais do projeto:</p>
@@ -611,83 +689,83 @@
 <li><strong>PixData</strong>: Uma classe de dados para armazenar e validar todas as informações da sua cobrança.</li>
 <li><strong>Pix</strong>: A classe principal que utiliza os dados do PixData para gerar o payload e o QR Code.</li>
 </ul>
-<pre><code class="language-Python">from pixcore.models import PixData
-from pixcore.brcode import Pix
-</code></pre>
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pixcore.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PixData</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pixcore.brcode</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pix</span>
+</span></code></pre></div>
 <h2 id="passo-3-reunindo-e-validando-os-dados"><strong>Passo 3</strong>: Reunindo e Validando os Dados</h2>
-<p>Agora, crie uma instância de PixData com as informações do recebedor e da transação. A grande vantagem é que esta classe valida os dados automaticamente, garantindo que o nome não é muito longo, que o valor é positivo, etc., prevenindo erros antes mesmo da geração do código.</p>
-<pre><code class="language-Python"># Crie um objeto com os dados da cobrança
-# Se houver algum dado inválido, um erro (ValueError) será levantado aqui.
-try:
-    dados_pix = PixData(
-        recebedor_nome=&quot;EMPRESA MODELO LTDA&quot;,
-        recebedor_cidade=&quot;CIDADE EXEMPLO&quot;,
-        pix_key=&quot;123e4567-e89b-12d3-a456-426655440000&quot;, # Use uma chave pix válida aqui
-        valor=25.50,
-        transacao_id=&quot;ID.DA.SUA.TRANSACAO.123&quot;
-    )
-except ValueError as e:
-    print(f&quot;Erro nos dados fornecidos: {e}&quot;)
-</code></pre>
+<p>Agora, crie uma instância de PixData com as informações do recebedor e da transação. A grande vantagem é que esta classe valida os dados automaticamente, garantindo que o nome não é muito longo, que o valor é positivo, etc., prevenindo erros antes mesmo da geração do código.
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Crie um objeto com os dados da cobrança</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Se houver algum dado inválido, um erro (ValueError) será levantado aqui.</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">dados_pix</span> <span class="o">=</span> <span class="n">PixData</span><span class="p">(</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">recebedor_nome</span><span class="o">=</span><span class="s2">&quot;EMPRESA MODELO LTDA&quot;</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">recebedor_cidade</span><span class="o">=</span><span class="s2">&quot;CIDADE EXEMPLO&quot;</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">pix_key</span><span class="o">=</span><span class="s2">&quot;123e4567-e89b-12d3-a456-426655440000&quot;</span><span class="p">,</span> <span class="c1"># Use uma chave pix válida aqui</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="n">valor</span><span class="o">=</span><span class="mf">25.50</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">transacao_id</span><span class="o">=</span><span class="s2">&quot;ID.DA.SUA.TRANSACAO.123&quot;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="p">)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erro nos dados fornecidos: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div></p>
 <h2 id="passo-4-gerando-o-payload-e-o-qr-code"><strong>Passo 4</strong>: Gerando o Payload e o QR Code</h2>
-<p>Com os dados validados, passe o objeto dados_pix para a classe Pix. A partir daí, você pode gerar o payload (Pix Copia e Cola) ou salvar o QR Code diretamente em um arquivo.</p>
-<pre><code class="language-Python"># Instancie a classe principal com os dados validados
-gerador_pix = Pix(dados_pix)
-
-# Para obter o payload (Copia e Cola)
-payload = gerador_pix.payload()
-print(&quot;Payload (Copia e Cola):&quot;)
-print(payload)
-
-# Para gerar e salvar o QR Code em um arquivo
-print(&quot;\nSalvando QR Code...&quot;)
-gerador_pix.save_qrcode(&quot;meu_primeiro_pix.png&quot;)
-</code></pre>
+<p>Com os dados validados, passe o objeto dados_pix para a classe Pix. A partir daí, você pode gerar o payload (Pix Copia e Cola) ou salvar o QR Code diretamente em um arquivo.
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Instancie a classe principal com os dados validados</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">gerador_pix</span> <span class="o">=</span> <span class="n">Pix</span><span class="p">(</span><span class="n">dados_pix</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Para obter o payload (Copia e Cola)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">payload</span> <span class="o">=</span> <span class="n">gerador_pix</span><span class="o">.</span><span class="n">payload</span><span class="p">()</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Payload (Copia e Cola):&quot;</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># Para gerar e salvar o QR Code em um arquivo</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Salvando QR Code...&quot;</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">gerador_pix</span><span class="o">.</span><span class="n">save_qrcode</span><span class="p">(</span><span class="s2">&quot;meu_primeiro_pix.png&quot;</span><span class="p">)</span>
+</span></code></pre></div></p>
 <hr />
 <h2 id="codigo-completo-exemplo-funcional">Código Completo (Exemplo Funcional)</h2>
 <p>Para facilitar, aqui está o script completo que você pode copiar, colar e executar para ver a mágica acontecer.</p>
-<pre><code class="language-Python">from pixcore.models import PixData
-from pixcore.brcode import Pix
-
-def gerar_cobranca_pix_exemplo():
-    &quot;&quot;&quot;
-    Função de exemplo que encapsula todos os passos para gerar um Pix.
-    &quot;&quot;&quot;
-    print(&quot;Iniciando a geração de uma cobrança Pix...&quot;)
-
-    try:
-        # 1. Defina e valide os dados da cobrança
-        dados_pix = PixData(
-            recebedor_nome=&quot;EMPRESA MODELO LTDA&quot;,
-            recebedor_cidade=&quot;CIDADE EXEMPLO&quot;,
-            pix_key=&quot;123e4567-e89b-12d3-a456-426655440000&quot;, # Chave aleatória (UUID)
-            valor=25.50,
-            transacao_id=&quot;TXID.12345&quot;
-        )
-        print(&quot;Dados validados com sucesso!&quot;)
-
-        # 2. Crie a instância principal do gerador
-        gerador_pix = Pix(dados_pix)
-
-        # 3. Obtenha o payload (Copia e Cola) e exiba
-        payload = gerador_pix.payload()
-        print(&quot;\n--- Payload (Copia e Cola) Gerado ---&quot;)
-        print(payload)
-        print(&quot;------------------------------------&quot;)
-
-        # 4. Salve o QR Code em um arquivo
-        caminho_arquivo = &quot;pix_exemplo.png&quot;
-        gerador_pix.save_qrcode(caminho_arquivo)
-
-        print(f&quot;\nQR Code foi salvo com sucesso em: '{caminho_arquivo}'&quot;)
-
-    except ValueError as e:
-        # Captura erros de validação da classe PixData
-        print(f&quot;\nERRO: Não foi possível gerar o Pix. Motivo: {e}&quot;)
-
-if __name__ == &quot;__main__&quot;:
-    gerar_cobranca_pix_exemplo()
-</code></pre>
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pixcore.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PixData</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pixcore.brcode</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pix</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">gerar_cobranca_pix_exemplo</span><span class="p">():</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="sd">    Função de exemplo que encapsula todos os passos para gerar um Pix.</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iniciando a geração de uma cobrança Pix...&quot;</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="c1"># 1. Defina e valide os dados da cobrança</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="n">dados_pix</span> <span class="o">=</span> <span class="n">PixData</span><span class="p">(</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>            <span class="n">recebedor_nome</span><span class="o">=</span><span class="s2">&quot;EMPRESA MODELO LTDA&quot;</span><span class="p">,</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>            <span class="n">recebedor_cidade</span><span class="o">=</span><span class="s2">&quot;CIDADE EXEMPLO&quot;</span><span class="p">,</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>            <span class="n">pix_key</span><span class="o">=</span><span class="s2">&quot;123e4567-e89b-12d3-a456-426655440000&quot;</span><span class="p">,</span> <span class="c1"># Chave aleatória (UUID)</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>            <span class="n">valor</span><span class="o">=</span><span class="mf">25.50</span><span class="p">,</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>            <span class="n">transacao_id</span><span class="o">=</span><span class="s2">&quot;TXID.12345&quot;</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="p">)</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dados validados com sucesso!&quot;</span><span class="p">)</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="c1"># 2. Crie a instância principal do gerador</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        <span class="n">gerador_pix</span> <span class="o">=</span> <span class="n">Pix</span><span class="p">(</span><span class="n">dados_pix</span><span class="p">)</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>        <span class="c1"># 3. Obtenha o payload (Copia e Cola) e exiba</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>        <span class="n">payload</span> <span class="o">=</span> <span class="n">gerador_pix</span><span class="o">.</span><span class="n">payload</span><span class="p">()</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Payload (Copia e Cola) Gerado ---&quot;</span><span class="p">)</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------------------------------------&quot;</span><span class="p">)</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>        <span class="c1"># 4. Salve o QR Code em um arquivo</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>        <span class="n">caminho_arquivo</span> <span class="o">=</span> <span class="s2">&quot;pix_exemplo.png&quot;</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>        <span class="n">gerador_pix</span><span class="o">.</span><span class="n">save_qrcode</span><span class="p">(</span><span class="n">caminho_arquivo</span><span class="p">)</span>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">QR Code foi salvo com sucesso em: &#39;</span><span class="si">{</span><span class="n">caminho_arquivo</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>        <span class="c1"># Captura erros de validação da classe PixData</span>
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ERRO: Não foi possível gerar o Pix. Motivo: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>    <span class="n">gerar_cobranca_pix_exemplo</span><span class="p">()</span>
+</span></code></pre></div>
 <p>Ao executar este script, ele imprimirá o payload no seu terminal e criará um arquivo de imagem pix_exemplo.png no mesmo diretório.</p>
 <p>Pronto! Agora você já sabe o básico para criar cobranças Pix com a biblioteca.</p>
 
@@ -738,7 +816,7 @@ if __name__ == &quot;__main__&quot;:
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate", "search.suggest"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.50899def.min.js"></script>

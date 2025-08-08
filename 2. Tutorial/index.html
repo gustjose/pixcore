@@ -26,6 +26,9 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
       
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
       
 
 
@@ -57,7 +60,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -108,10 +118,78 @@
       </div>
     </div>
     
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
     
     
       <div class="md-header__source">
@@ -632,95 +710,95 @@
 <hr />
 <h2 id="1-gerando-um-pix-sem-valor-definido">1. Gerando um Pix sem Valor Definido</h2>
 <p>Um caso de uso muito comum é gerar um QR Code onde o pagador pode inserir o valor que desejar. Para fazer isso, basta omitir o parâmetro <code>valor</code> ou defini-lo como <code>None</code> ao criar seu objeto <code>PixData</code>.</p>
-<pre><code class="language-python">from pixcore.models import PixData
-from pixcore.brcode import Pix
-
-# 1. Crie os dados sem o campo &quot;valor&quot;
-dados_pix_livre = PixData(
-    recebedor_nome=&quot;ONG BEM MAIOR&quot;,
-    recebedor_cidade=&quot;BRASILIA&quot;,
-    pix_key=&quot;projetobemmaior@email.com&quot;, # Chave do tipo e-mail
-    transacao_id=&quot;DOACAO123&quot;
-)
-
-# 2. Instancie o gerador
-gerador_pix = Pix(dados_pix_livre)
-
-# 3. Salve o QR Code
-gerador_pix.save_qrcode(&quot;pix_sem_valor.png&quot;)
-
-print(&quot;QR Code para doação (valor livre) salvo com sucesso!&quot;)`
-</code></pre>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pixcore.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PixData</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pixcore.brcode</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pix</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 1. Crie os dados sem o campo &quot;valor&quot;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">dados_pix_livre</span> <span class="o">=</span> <span class="n">PixData</span><span class="p">(</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">recebedor_nome</span><span class="o">=</span><span class="s2">&quot;ONG BEM MAIOR&quot;</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">recebedor_cidade</span><span class="o">=</span><span class="s2">&quot;BRASILIA&quot;</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">pix_key</span><span class="o">=</span><span class="s2">&quot;projetobemmaior@email.com&quot;</span><span class="p">,</span> <span class="c1"># Chave do tipo e-mail</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">transacao_id</span><span class="o">=</span><span class="s2">&quot;DOACAO123&quot;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># 2. Instancie o gerador</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">gerador_pix</span> <span class="o">=</span> <span class="n">Pix</span><span class="p">(</span><span class="n">dados_pix_livre</span><span class="p">)</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># 3. Salve o QR Code</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">gerador_pix</span><span class="o">.</span><span class="n">save_qrcode</span><span class="p">(</span><span class="s2">&quot;pix_sem_valor.png&quot;</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;QR Code para doação (valor livre) salvo com sucesso!&quot;</span><span class="p">)</span><span class="err">`</span>
+</span></code></pre></div>
 <p>O arquivo pix_sem_valor.png gerado permitirá que o usuário defina o valor a ser pago no app do banco.</p>
 <h2 id="2-customizacao-visual-do-qr-code">2. Customização Visual do QR Code</h2>
 <p>A biblioteca permite personalizar a aparência do QR Code de duas formas principais: adicionando um logo e alterando as cores.</p>
 <h3 id="21-adicionando-um-logo">2.1. Adicionando um Logo</h3>
 <p>Você pode embutir uma imagem (como o logo da sua marca) no centro do QR Code. Para isso, a biblioteca usa um nível de correção de erros alto, garantindo que o código continue legível.</p>
 <p>Importante: O logo deve estar em um formato de imagem comum (.png, .jpg) e não pode ser muito grande para não comprometer a leitura.</p>
-<pre><code class="language-Python"># Reutilizando os dados do exemplo anterior
-dados_pix_com_valor = PixData(
-    recebedor_nome=&quot;CAFETERIA DO JOSE&quot;,
-    recebedor_cidade=&quot;RIO DE JANEIRO&quot;,
-    pix_key=&quot;pagamento@cafeteriajose.com.br&quot;,
-    valor=15.00,
-    transacao_id=&quot;CAFE-PEDIDO-456&quot;
-)
-
-gerador_pix = Pix(dados_pix_com_valor)
-
-# Use o parâmetro &quot;caminho_logo&quot; para especificar a imagem
-gerador_pix.save_qrcode(
-    &quot;pix_com_logo.png&quot;,
-    caminho_logo=&quot;caminho/para/seu/logo.png&quot; # Altere para o caminho real do seu logo
-)
-print(&quot;QR Code com logo salvo!&quot;)
-</code></pre>
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Reutilizando os dados do exemplo anterior</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">dados_pix_com_valor</span> <span class="o">=</span> <span class="n">PixData</span><span class="p">(</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">recebedor_nome</span><span class="o">=</span><span class="s2">&quot;CAFETERIA DO JOSE&quot;</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">recebedor_cidade</span><span class="o">=</span><span class="s2">&quot;RIO DE JANEIRO&quot;</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">pix_key</span><span class="o">=</span><span class="s2">&quot;pagamento@cafeteriajose.com.br&quot;</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">valor</span><span class="o">=</span><span class="mf">15.00</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">transacao_id</span><span class="o">=</span><span class="s2">&quot;CAFE-PEDIDO-456&quot;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">gerador_pix</span> <span class="o">=</span> <span class="n">Pix</span><span class="p">(</span><span class="n">dados_pix_com_valor</span><span class="p">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># Use o parâmetro &quot;caminho_logo&quot; para especificar a imagem</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">gerador_pix</span><span class="o">.</span><span class="n">save_qrcode</span><span class="p">(</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="s2">&quot;pix_com_logo.png&quot;</span><span class="p">,</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="n">caminho_logo</span><span class="o">=</span><span class="s2">&quot;caminho/para/seu/logo.png&quot;</span> <span class="c1"># Altere para o caminho real do seu logo</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">)</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;QR Code com logo salvo!&quot;</span><span class="p">)</span>
+</span></code></pre></div>
 <h3 id="22-alterando-as-cores">2.2. Alterando as Cores</h3>
 <p>É possível alterar a cor de preenchimento do QR Code e a cor do fundo usando os parâmetros cor_qr e cor_fundo. Você pode usar nomes de cores em inglês (ex: "navy") ou códigos hexadecimais (ex: "#000080").</p>
-<pre><code class="language-Python"># Reutilizando o mesmo gerador
-gerador_pix.save_qrcode(
-    &quot;pix_colorido.png&quot;,
-    cor_qr=&quot;navy&quot;,       # Cor dos blocos do QR Code
-    cor_fundo=&quot;#EFEFEF&quot;  # Cor de fundo
-)
-print(&quot;QR Code colorido salvo!&quot;)
-</code></pre>
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Reutilizando o mesmo gerador</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">gerador_pix</span><span class="o">.</span><span class="n">save_qrcode</span><span class="p">(</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">&quot;pix_colorido.png&quot;</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">cor_qr</span><span class="o">=</span><span class="s2">&quot;navy&quot;</span><span class="p">,</span>       <span class="c1"># Cor dos blocos do QR Code</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">cor_fundo</span><span class="o">=</span><span class="s2">&quot;#EFEFEF&quot;</span>  <span class="c1"># Cor de fundo</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;QR Code colorido salvo!&quot;</span><span class="p">)</span>
+</span></code></pre></div>
 <h2 id="3-manipulando-o-qr-code-em-memoria">3. Manipulando o QR Code em Memória</h2>
 <p>E se você não quiser salvar o QR Code em um arquivo? Por exemplo, para exibi-lo em uma página web com Flask/Django ou inseri-lo em um PDF com reportlab.</p>
 <p>Para isso, use o método .qrcode() em vez de .save_qrcode(). Ele retorna um objeto de imagem da biblioteca Pillow (PIL), que você pode manipular como quiser.</p>
-<pre><code class="language-Python">from pixcore.models import PixData
-from pixcore.brcode import Pix
-
-dados_pix = PixData(
-    recebedor_nome=&quot;LOJA ONLINE&quot;,
-    recebedor_cidade=&quot;CURITIBA&quot;,
-    pix_key=&quot;vendas@lojaonline.com&quot;,
-    valor=99.90,
-    transacao_id=&quot;WEB-VENDA-789&quot;
-)
-gerador_pix = Pix(dados_pix)
-
-# 1. Gere a imagem do QR Code em memória
-imagem_qr = gerador_pix.qrcode()
-
-# 2. Agora você tem um objeto de imagem. Você pode:
-#    - Exibi-la (bom para testes e scripts locais)
-print(&quot;Exibindo imagem em uma janela...&quot;)
-imagem_qr.show()
-</code></pre>
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pixcore.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PixData</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pixcore.brcode</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pix</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">dados_pix</span> <span class="o">=</span> <span class="n">PixData</span><span class="p">(</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">recebedor_nome</span><span class="o">=</span><span class="s2">&quot;LOJA ONLINE&quot;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">recebedor_cidade</span><span class="o">=</span><span class="s2">&quot;CURITIBA&quot;</span><span class="p">,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">pix_key</span><span class="o">=</span><span class="s2">&quot;vendas@lojaonline.com&quot;</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">valor</span><span class="o">=</span><span class="mf">99.90</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">transacao_id</span><span class="o">=</span><span class="s2">&quot;WEB-VENDA-789&quot;</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">gerador_pix</span> <span class="o">=</span> <span class="n">Pix</span><span class="p">(</span><span class="n">dados_pix</span><span class="p">)</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1"># 1. Gere a imagem do QR Code em memória</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="n">imagem_qr</span> <span class="o">=</span> <span class="n">gerador_pix</span><span class="o">.</span><span class="n">qrcode</span><span class="p">()</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># 2. Agora você tem um objeto de imagem. Você pode:</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="c1">#    - Exibi-la (bom para testes e scripts locais)</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exibindo imagem em uma janela...&quot;</span><span class="p">)</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="n">imagem_qr</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
 <p>Este método oferece máxima flexibilidade para integrar o QR Code em qualquer fluxo de trabalho da sua aplicação.</p>
 <h2 id="4-tratamento-de-erros">4. Tratamento de Erros</h2>
 <p>Como visto no início, a classe PixData protege sua aplicação de dados inválidos. É uma boa prática sempre envolver a criação de PixData em um bloco try...except para capturar e tratar esses erros de forma elegante.</p>
-<pre><code class="language-Python">try:
-    # Tentando criar um Pix com um nome de recebedor longo demais
-    dados_errados = PixData(
-        recebedor_nome=&quot;UM NOME DE EMPRESA EXTREMAMENTE LONGO QUE VAI CAUSAR UM ERRO DE VALIDACAO&quot;,
-        recebedor_cidade=&quot;SAO PAULO&quot;,
-        pix_key=&quot;chave-valida@email.com&quot;
-    )
-except ValueError as e:
-    print(f&quot;Ocorreu um erro esperado: {e}&quot;)
-</code></pre>
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="c1"># Tentando criar um Pix com um nome de recebedor longo demais</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">dados_errados</span> <span class="o">=</span> <span class="n">PixData</span><span class="p">(</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">recebedor_nome</span><span class="o">=</span><span class="s2">&quot;UM NOME DE EMPRESA EXTREMAMENTE LONGO QUE VAI CAUSAR UM ERRO DE VALIDACAO&quot;</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">recebedor_cidade</span><span class="o">=</span><span class="s2">&quot;SAO PAULO&quot;</span><span class="p">,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">pix_key</span><span class="o">=</span><span class="s2">&quot;chave-valida@email.com&quot;</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="p">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ocorreu um erro esperado: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
 <p>Com isso, você tem uma visão completa de como utilizar os principais recursos do PixCore. Para detalhes sobre cada parâmetro e método, consulte a Referência da API.</p>
 
 
@@ -770,7 +848,7 @@ except ValueError as e:
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate", "search.suggest"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.50899def.min.js"></script>
