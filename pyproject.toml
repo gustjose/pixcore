@@ -1,6 +1,6 @@
 [project]
 name = "pixcore"
-version = "0.1.0"
+version = "0.1.1"
 description = "Uma biblioteca Python completa para a geração de BR Codes (QR Code e Copia e Cola) do Pix, seguindo as especificações do Banco Central do Brasil."
 authors = [
     {name = "Gustavo Carreiro",email = "gjvcarreiro@gmail.com"}
@@ -35,9 +35,7 @@ packages = [{include = "pixcore", from = "src"}]
 
 [tool.poetry.urls]
 "Documentação" = "https://gustjose.github.io/pixcore/"
-"Repositório" = "https://github.com/gustjose/pixcore"
 "Bug Tracker" = "https://github.com/gustjose/pixcore/issues"
-
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
@@ -45,7 +43,6 @@ taskipy = "^1.14.1"
 rich = "^14.1.0"
 blue = "^0.9.1"
 isort = "^6.0.1"
-
 
 [tool.poetry.group.doc.dependencies]
 mkdocs-material = "^9.6.16"
