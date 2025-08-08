@@ -1,7 +1,7 @@
 # PixCore
 
 <p align="center">
-  <img src="docs/assets/banner-white.png" alt="logo do projeto" width="700">
+  <img src="https://raw.githubusercontent.com/gustjose/pixcore/refs/heads/main/docs/assets/banner.png" alt="logo do projeto" width="700">
 </p>
 
 <p align="center">
@@ -46,8 +46,8 @@ Usar o PixCore é um processo de apenas dois passos:
 ### Exemplo 1: Gerando um QR Code com Valor e Logo
 
 ```Python
-from src.pixcore.models import PixData
-from src.pixcore.brcode import Pix
+from pixcore.models import PixData
+from pixcore.brcode import Pix
 
 # 1. Defina os dados da cobrança Pix
 dados_pix = PixData(
@@ -78,8 +78,8 @@ print(payload)
 Para gerar um QR Code onde o pagador pode digitar o valor, simplesmente omita o parâmetro valor ao criar o PixData.
 
 ```Python
-from src.pixcore.models import PixData
-from src.pixcore.brcode import Pix
+from pixcore.models import PixData
+from pixcore.brcode import Pix
 
 dados_doacao = PixData(
     recebedor_nome="ONG BEM MAIOR",
