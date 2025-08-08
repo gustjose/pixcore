@@ -1,7 +1,7 @@
 # PixCore
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/gustjose/pixcore/refs/heads/main/docs/assets/banner.png" alt="logo do projeto" width="700">
+  <img src="https://raw.githubusercontent.com/gustjose/pixcore/refs/heads/main/docs/assets/banner-white.png" alt="logo do projeto" width="700">
 </p>
 
 <p align="center">
