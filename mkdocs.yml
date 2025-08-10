@@ -45,12 +45,16 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - js/custom.js
+
 plugins:
 - mkdocstrings:
     handlers:
       python:
         paths: [src]
 - search
+- mkdocs_github_changelog
 
 extra:
   comandos:

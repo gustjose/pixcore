@@ -240,6 +240,24 @@ files = [
 markers = {main = "sys_platform == \"win32\""}
 
 [[package]]
+name = "fastcore"
+version = "1.8.7"
+description = "Python supercharged for fastai development"
+optional = false
+python-versions = ">=3.9"
+groups = ["doc"]
+files = [
+    {file = "fastcore-1.8.7-py3-none-any.whl", hash = "sha256:3d71e9bae64d335dfad9bff58ff8985091e8fbc23651b0b1b8d16fa4895ff42d"},
+    {file = "fastcore-1.8.7.tar.gz", hash = "sha256:ff4d976abaf2e298265e675cf8bf504f6ee2ab5fc159f9b4f153c6a5a03f6bf7"},
+]
+
+[package.dependencies]
+packaging = "*"
+
+[package.extras]
+dev = ["llms-txt", "matplotlib", "nbclassic", "nbdev (>=0.2.39)", "numpy", "pandas", "pillow", "plum-dispatch", "pysymbol_llm", "torch"]
+
+[[package]]
 name = "flake8"
 version = "4.0.1"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -255,6 +273,25 @@ files = [
 mccabe = ">=0.6.0,<0.7.0"
 pycodestyle = ">=2.8.0,<2.9.0"
 pyflakes = ">=2.4.0,<2.5.0"
+
+[[package]]
+name = "ghapi"
+version = "1.0.6"
+description = "A python client for the GitHub API"
+optional = false
+python-versions = ">=3.7"
+groups = ["doc"]
+files = [
+    {file = "ghapi-1.0.6-py3-none-any.whl", hash = "sha256:b3d96bf18fcaa2cb7131bad9de2948e2a1c2bb226377a25826f6c80950c57854"},
+    {file = "ghapi-1.0.6.tar.gz", hash = "sha256:64fdd9f06d8e3373065c42c2a03e067e2bbb9ca18b583cd6e38a28aaad0224f6"},
+]
+
+[package.dependencies]
+fastcore = ">=1.7.2"
+packaging = "*"
+
+[package.extras]
+dev = ["jsonref", "matplotlib"]
 
 [[package]]
 name = "ghp-import"
@@ -574,6 +611,31 @@ files = [
 mergedeep = ">=1.3.4"
 platformdirs = ">=2.2.0"
 pyyaml = ">=5.1"
+
+[[package]]
+name = "mkdocs-github-changelog"
+version = "0.1.0"
+description = "mkdocs extension to autogenerate changelog from github"
+optional = false
+python-versions = ">3.7"
+groups = ["doc"]
+files = [
+    {file = "mkdocs_github_changelog-0.1.0-py3-none-any.whl", hash = "sha256:9981ddeb16a029e31693a47ffffed19a61496876b737c0deccef5cd76464637a"},
+    {file = "mkdocs_github_changelog-0.1.0.tar.gz", hash = "sha256:aa2b354620500d03de35a7ef6ddd6f9b14f55c49678684e5dd191853e0a69354"},
+]
+
+[package.dependencies]
+ghapi = "*"
+mkdocs = ">=1.4"
+
+[package.extras]
+dev = ["importlib-metadata ; python_version < \"3.8\"", "nox", "setuptools-scm[toml]"]
+dev-build = ["build"]
+dev-docs = ["mike", "mkdocs", "mkdocs-coverage", "mkdocs-git-authors-plugin", "mkdocs-git-revision-date-localized-plugin", "mkdocs-include-markdown-plugin", "mkdocs-material", "mkdocstrings[python]"]
+dev-lint = ["flake8 (>=5.0.4)", "flake8-bugbear (>=22.0.0)", "flake8-comprehensions (>=3.12.0)", "flake8-docstrings (>=0.2.7)", "flake8-eradicate (>=1.4.0)", "flake8-import-order (>=0.18.2)", "flake8-noqa (>=1.3.1)", "flake8-pyproject (>=1.2.3)", "flake8-unused-arguments (>=0.0.13)"]
+dev-security = ["bandit", "pipenv"]
+dev-test = ["mkdocs-material", "nskit", "pytest (>=7.3.1)", "pytest-cov (>=4)", "pytest-subtests", "pytest-xdist"]
+dev-types = ["mypy", "types-colorama", "types-setuptools"]
 
 [[package]]
 name = "mkdocs-macros-plugin"
@@ -1343,4 +1405,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4.0"
-content-hash = "56e89b96faab4e798222f8c411ee195dfc38c86aa737b5118353f9611bb487ee"
+content-hash = "c25bcd972d3825b2216ad3ef8f8fbd50da1c4be54d642e0212f390b20d4a2f4a"
