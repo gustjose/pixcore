@@ -17,14 +17,10 @@ jobs:
       - name: Instalar o Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
-          cache: 'poetry'
+          python-version: '3.13.0'
 
       - name: Instalar Poetry
         run: pipx install poetry
-
-      - name: Adicionar Poetry ao PATH
-        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Instalar dependências do projeto
         run: poetry install
