@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/pypi/pyversions/pixcore?style=for-the-badge" alt="Python Versions">
-  <img src="https://img.shields.io/pypi/v/pixcore?style=for-the-badge&color=blue" alt="PyPI Version">
-  <img src="https://img.shields.io/pypi/l/pixcore?style=for-the-badge&color=green" alt="License">
+    <a href="https://github.com/gustjose/pixcore/releases/latest"><img src="https://img.shields.io/github/v/release/gustjose/pixcore?sort=date&display_name=release&style=for-the-badge&logo=github&logoColor=%23fff&labelColor=%2320201e&color=%234e6879" alt="Github Releases"></a>
+  <a href="https://pypi.org/project/pixcore/"><img src="https://img.shields.io/pypi/v/pixcore?style=for-the-badge&logo=pypi&logoColor=%23fff&labelColor=%2320201e&color=%234e6879" alt="PyPI Version"></a>
+  <a href="https://github.com/gustjose/pixcore/blob/main/LICENSE"><img src="https://img.shields.io/github/license/gustjose/pixcore?style=for-the-badge&labelColor=%2320201e&color=%234e6879" alt="License"></a>
 </p>
 
 Uma biblioteca Python robusta e intuitiva para a geração de QR Codes e payloads "Copia e Cola" do Pix, seguindo as especificações do Banco Central do Brasil.
