@@ -9,18 +9,15 @@ on:
 jobs:
   test-app:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
 
     steps:
       - name: Copia os arquivos do repo
         uses: actions/checkout@v4
 
-      - name: Instalar o Python ${{ matrix.python-version }}
+      - name: Instalar o Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.13"
           cache: 'poetry'
 
       - name: Instalar Poetry
