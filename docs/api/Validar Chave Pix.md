@@ -1,0 +1,1 @@
+::: pixcore.validate

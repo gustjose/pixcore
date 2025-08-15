@@ -1,3 +1,4 @@
+from . import validate
 from dataclasses import dataclass
 from typing import Optional
 import re
@@ -83,11 +84,37 @@ class PixData:
         if self.transacao_id != '***' and not re.match(r'^[a-zA-Z0-9]{1,25}$', self.transacao_id):
             raise ValueError("O ID da Transação (transacao_id) deve ser alfanumérico com até 25 caracteres.")
 
-        if not self.pix_key or len(self.pix_key) > 77 or len(self.pix_key) < 10: 
+        if not self.pix_key or len(self.pix_key) > 77: 
             raise ValueError("A chave Pix (pix_key) é obrigatória e deve ter até 77 caracteres.")
-
+        elif self.tipo_chave() == "Tipo Desconhecido":
+            raise ValueError("O formato da chave Pix (pix_key) não é reconhecido.")
+            
         if self.valor is not None and self.valor <= 0:
             raise ValueError("O valor (valor), se presente, deve ser positivo.")
             
         if self.recebedor_cep and not re.match(r'^\d{8}$', self.recebedor_cep):
             raise ValueError("O CEP (recebedor_cep) deve conter 8 dígitos numéricos.")
+        
+    def tipo_chave(self) -> str:
+        """
+        Identifica o tipo da chave Pix testando-a contra validadores
+        na ordem de maior especificidade para a de menor.
+        """
+        chave = self.pix_key
+
+        if validate.validar_chave_aleatoria(chave):
+            return "Chave Aleatória (EVP)"
+        
+        if '@' in chave and validate.validar_email(chave):
+            return "Email"
+            
+        if validate.validar_telefone(chave):
+            return "Telefone"
+            
+        if validate.validar_cpf(chave):
+            return "CPF"
+            
+        if validate.validar_cnpj(chave):
+            return "CNPJ"
+
+        return "Tipo Desconhecido"

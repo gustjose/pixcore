@@ -20,20 +20,20 @@ O principal objetivo é fornecer uma interface clara e direta para gerar o paylo
 
 -   :fontawesome-solid-clock: __Início Rápido__
 
-    <a href="/1. Início Rápido/">Dicas rápidas para sair usando</a>
+    <a href="1. Início Rápido/">Dicas rápidas para sair usando</a>
 
 
 -   :fontawesome-solid-graduation-cap: __Tutorial__
 
-    <a href="/2. Tutorial/">Para quem quer aprender mais</a>
+    <a href="2. Tutorial/">Para quem quer aprender mais</a>
 
 -   :fontawesome-solid-handshake-angle: __Contribuir__
 
-    <a href="/3. Contribuição/">Ajude a melhorar o projeto!</a>
+    <a href="3. Contribuição/">Ajude a melhorar o projeto!</a>
 
 -   :fontawesome-solid-circle-info: __Sobre__
 
-    <a href="/4. Sobre/">Conheça mais sobre o projeto!</a>
+    <a href="4. Sobre/">Conheça mais sobre o projeto!</a>
 
 </div>
 
