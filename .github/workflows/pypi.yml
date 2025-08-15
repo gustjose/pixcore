@@ -31,6 +31,9 @@ jobs:
       - name: Instalar Poetry
         run: pipx install poetry
 
+      - name: Adicionar Poetry ao PATH
+        run: pipx ensurepath
+
       - name: Sincronizar versão do pacote com a tag
         run: poetry version ${{ github.ref_name }}
 
