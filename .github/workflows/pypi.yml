@@ -1,11 +1,17 @@
 name: Publicar Pacote no PyPI
+
 on:
   release:
     types: [published]
 
 jobs:
+  test-app:
+    name: Rodar Testes
+    uses: ./.github/workflows/test-app.yml
+
   build-and-publish:
     name: Construir e Publicar no PyPI
+    needs: test-app
     runs-on: ubuntu-latest
     permissions:
       id-token: write

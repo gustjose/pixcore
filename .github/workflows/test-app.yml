@@ -1,0 +1,33 @@
+name: Integração Contínua
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_call:
+
+jobs:
+  test-app:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12', '3.13']
+
+    steps:
+      - name: Copia os arquivos do repo
+        uses: actions/checkout@v4
+
+      - name: Instalar o Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'poetry'
+
+      - name: Instalar Poetry
+        run: pipx install poetry
+
+      - name: Instalar dependências do projeto
+        run: poetry install
+
+      - name: Rodar os testes
+        run: poetry run task test
