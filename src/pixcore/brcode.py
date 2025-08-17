@@ -1,4 +1,5 @@
 from . import constants as const
+from . import exceptions
 from . import utils
 from .models import PixData
 from PIL import Image
@@ -139,9 +140,17 @@ class Pix:
                 
                 img_qr.paste(logo, (pos_x, pos_y), mask=logo)
             except FileNotFoundError:
-                print(f"Aviso: Logo não encontrado em '{caminho_logo}'. Gerando sem logo.")
+                raise exceptions.ErroProcessamentoImagemError(
+                    caminho_imagem=caminho_logo,
+                    motivo="Arquivo não encontrado."
+                ) from None
+            
             except Exception as e:
-                print(f"Aviso: Erro ao processar o logo: {e}. Gerando sem logo.")
+                # Erro genérico de processamento.
+                raise exceptions.ErroProcessamentoImagemError(
+                    caminho_imagem=caminho_logo,
+                    motivo=f"Erro desconhecido ao processar o logo: {e}"
+                ) from e
         
         return img_qr
     
@@ -167,5 +176,13 @@ class Pix:
             imagem_qr = self.qrcode(caminho_logo=caminho_logo, cor_qr=cor_qr, cor_fundo=cor_fundo)
             imagem_qr.save(caminho_arquivo_saida)
             return True
+        except (IOError, PermissionError) as e:
+            raise exceptions.ErroDeESError(
+                caminho_arquivo=caminho_arquivo_saida,
+                motivo=f"Não foi possível salvar o arquivo. Verifique as permissões. Erro original: {e}"
+            ) from e
         except Exception as e:
-            raise Exception(f"Erro ao salvar o QR Code: {e}")
+            raise exceptions.ErroDeESError(
+                caminho_arquivo=caminho_arquivo_saida,
+                motivo=f"Ocorreu um erro inesperado ao salvar o QR Code: {e}"
+            ) from e
