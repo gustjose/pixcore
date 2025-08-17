@@ -142,7 +142,7 @@ class Pix:
                 print(f"Aviso: Logo não encontrado em '{caminho_logo}'. Gerando sem logo.")
             except Exception as e:
                 print(f"Aviso: Erro ao processar o logo: {e}. Gerando sem logo.")
-                
+        
         return img_qr
     
     def save_qrcode(self, caminho_arquivo_saida: str, caminho_logo: str = None, cor_qr: str = "black", cor_fundo: str = "white"):
@@ -163,6 +163,9 @@ class Pix:
             >>> pix_generator.save_qrcode("meu_pix_qr.png", caminho_logo="logo.png")
             QR Code salvo com sucesso em: meu_pix_qr.png
         """
-        imagem_qr = self.qrcode(caminho_logo=caminho_logo, cor_qr=cor_qr, cor_fundo=cor_fundo)
-        imagem_qr.save(caminho_arquivo_saida)
-        print(f"QR Code salvo com sucesso em: {caminho_arquivo_saida}")
+        try:
+            imagem_qr = self.qrcode(caminho_logo=caminho_logo, cor_qr=cor_qr, cor_fundo=cor_fundo)
+            imagem_qr.save(caminho_arquivo_saida)
+            return True
+        except Exception as e:
+            raise Exception(f"Erro ao salvar o QR Code: {e}")
