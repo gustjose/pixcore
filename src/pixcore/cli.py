@@ -1,6 +1,7 @@
 import typer
 from typing import Optional
 from . import brcode, models
+from . import exceptions
 from rich.console import Console
 from rich.panel import Panel
 from rich_pixels import Pixels
@@ -58,11 +59,24 @@ def payload(
         
         console.print(payload_gerado)
 
-    except ValueError as e:
-        console.print(panel("❌ Erro de validação", f"{e}"))
+    except exceptions.ErroGeracaoPayloadError as e:
+        console.print(panel("❌ Erro de Validação de Dados", f"Campo: [bold]{e.campo}[/bold]\nMotivo: {e.motivo}"))
         raise typer.Exit(code=1)
+
+    except exceptions.ChavePixInvalidaError as e:
+        console.print(panel("❌ Chave PIX Inválida", f"{e}"))
+        raise typer.Exit(code=1)
+
+    except exceptions.ErroProcessamentoImagemError as e:
+        console.print(panel("❌ Erro de Imagem", f"{e}"))
+        raise typer.Exit(code=1)
+
+    except exceptions.ErroDeESError as e:
+        console.print(panel("❌ Erro ao Salvar Arquivo", f"{e}\nVerifique o caminho e as permissões."))
+        raise typer.Exit(code=1)
+
     except Exception as e:
-        console.print(panel("❌ Ocorreu um erro inesperado:", f"{e}"))
+        console.print(panel("❌ Ocorreu um erro inesperado", f"{e}"))
         raise typer.Exit(code=1)
 
 @app.command()
@@ -115,12 +129,24 @@ def qrcode(
                 )
             )
 
-
-    except ValueError as e:
-        console.print(panel("❌ Erro de validação", f"{e}"))
+    except exceptions.ErroGeracaoPayloadError as e:
+        console.print(panel("❌ Erro de Validação de Dados", f"Campo: [bold]{e.campo}[/bold]\nMotivo: {e.motivo}"))
         raise typer.Exit(code=1)
+
+    except exceptions.ChavePixInvalidaError as e:
+        console.print(panel("❌ Chave PIX Inválida", f"{e}"))
+        raise typer.Exit(code=1)
+
+    except exceptions.ErroProcessamentoImagemError as e:
+        console.print(panel("❌ Erro de Imagem", f"{e}"))
+        raise typer.Exit(code=1)
+
+    except exceptions.ErroDeESError as e:
+        console.print(panel("❌ Erro ao Salvar Arquivo", f"{e}\nVerifique o caminho e as permissões."))
+        raise typer.Exit(code=1)
+
     except Exception as e:
-        console.print(panel("❌ Ocorreu um erro inesperado:", f"{e}"))
+        console.print(panel("❌ Ocorreu um erro inesperado", f"{e}"))
         raise typer.Exit(code=1)
     
 if __name__ == "__main__":
