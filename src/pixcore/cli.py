@@ -3,13 +3,101 @@ from typing import Optional
 from . import brcode, models
 from . import exceptions
 from rich.console import Console
+from rich.table import Table
 from rich.panel import Panel
 from rich_pixels import Pixels
+import pyfiglet
+
+__version__ = "0.1.2"
 
 console = Console()
 app = typer.Typer(
-    help="CLI para gerar payloads e QR Codes PIX com a biblioteca Pixcore."
+    add_completion=False
 )
+
+def version_callback(value: bool):
+    if value:
+        console.print(f"PixCore CLI Versão: {__version__}")
+        raise typer.Exit()
+    
+def help_callback(value: bool):
+    if not value:
+        return
+
+    table_comandos = Table(
+        show_header=False, 
+        header_style="bold magenta",
+        padding=(0, 1),
+        box=None
+    )
+
+    table_comandos.add_column("Comando / Opção", style="cyan", no_wrap=True, width=10)
+    table_comandos.add_column("Descrição", width=75)
+
+    # Seção de Comandos
+    table_comandos.add_section()
+    table_comandos.add_row(
+        "payload",
+        "Gera e exibe um [b]payload PIX[/] no formato TLV (Copia e Cola)."
+    )
+    table_comandos.add_row(
+        "qrcode", 
+        "Gera um [b]QR Code PIX[/] e o exibe no terminal ou salva em um arquivo."
+    )
+    
+    table_global = Table(
+        show_header=False, 
+        header_style="bold magenta",
+        padding=(0, 1),
+        box=None
+    )
+
+    table_global.add_column("Comando / Opção", style="cyan", no_wrap=True, width=10)
+    table_global.add_column("Atalhos", style="green", width=15)
+    table_global.add_column("Descrição", width=60)
+
+    table_global.add_section()
+    table_global.add_row(
+        "--version", 
+        "-v, --versao", 
+        "Mostra a versão instalada do PixCore CLI."
+    )
+    table_global.add_row(
+        "--help", 
+        "-h", 
+        "Mostra esta mensagem de ajuda detalhada."
+    )
+
+    f = pyfiglet.Figlet(
+        font='starwars'
+    )
+    console.print(
+        f.renderText('PixCore'),
+        style="bold blue",
+    )
+
+    console.print("Uma ferramenta de linha de comando para gerar PIX de forma rápida e fácil.")
+    console.print("Para mais informações, acesse: https://github.com/gustjose/pixcore\n")
+    
+    console.print(
+        Panel(
+            table_comandos,
+            title="Comandos",
+            expand=False,
+            title_align='left',
+        )
+    )
+
+    console.print(
+        Panel(
+            table_global,
+            title="Opções Globais",
+            expand=False,
+            title_align='left',
+        ))
+
+    console.print("Para ajuda sobre um comando específico, use: [b][yellow]pixcore [NOME_DO_COMANDO] --help[/]\n")
+    raise typer.Exit()
 
 def panel(titulo, mensagem, color="red"):
     return Panel(
@@ -23,11 +111,36 @@ def panel(titulo, mensagem, color="red"):
         expand=False,
     )
 
-@app.command()
+@app.callback(invoke_without_command=True)
+def main(
+    ctx: typer.Context,
+    version: Optional[bool] = typer.Option(
+        None,
+        "--version",
+        "-v",
+        "--versao",
+        help="Mostra a versão do PixCore.",
+        callback=version_callback,
+        is_eager=True,
+    ),
+    help: Optional[bool] = typer.Option(
+        None,
+        "--help", "-h",
+        callback=help_callback,
+        is_eager=True,
+        help="Mostra a mensagem de ajuda customizada.",
+    )
+):
+    if ctx.invoked_subcommand is None:
+        help_callback(True)
+
+@app.command(
+    help="Gera um payload PIX no formato TLV (Copia e Cola).",
+)
 def payload(
-    key: str = typer.Option(..., "--key", "-k", help="Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória)."),
-    name: str = typer.Option(..., "--name", "-n", help="Nome do beneficiário."),
-    city: str = typer.Option(..., "--city", "-c", help="Cidade do beneficiário (maiúsculas, sem acentos)."),
+    key: str = typer.Option(..., "--key", "-k", help="Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória).", prompt=True),
+    name: str = typer.Option(..., "--name", "-n", help="Nome do beneficiário.", prompt=True),
+    city: str = typer.Option(..., "--city", "-c", help="Cidade do beneficiário (maiúsculas, sem acentos).", prompt=True),
     amount: Optional[float] = typer.Option(None, "--amount", "-a", help="Valor da transação. Ex: 10.50"),
     txid: str = typer.Option("***", "--txid", "-t", help="ID da transação (Transaction ID)."),
     info: Optional[str] = typer.Option(None, "--info", "-i", help="Informações adicionais para o pagador."),
@@ -59,7 +172,7 @@ def payload(
         
         console.print(payload_gerado)
 
-    except exceptions.ErroGeracaoPayloadError as e:
+    except exceptions.GeracaoPayloadError as e:
         console.print(panel("❌ Erro de Validação de Dados", f"Campo: [bold]{e.campo}[/bold]\nMotivo: {e.motivo}"))
         raise typer.Exit(code=1)
 
@@ -67,7 +180,7 @@ def payload(
         console.print(panel("❌ Chave PIX Inválida", f"{e}"))
         raise typer.Exit(code=1)
 
-    except exceptions.ErroProcessamentoImagemError as e:
+    except exceptions.ProcessamentoImagemError as e:
         console.print(panel("❌ Erro de Imagem", f"{e}"))
         raise typer.Exit(code=1)
 
@@ -79,12 +192,14 @@ def payload(
         console.print(panel("❌ Ocorreu um erro inesperado", f"{e}"))
         raise typer.Exit(code=1)
 
-@app.command()
+@app.command(
+    help="Gera um QR Code PIX.",
+)
 def qrcode(
     output: Optional[str] = typer.Option(None, "--output", "-o", help="Caminho e nome do arquivo de saída (ex: 'output/pix.png')."),
-    key: str = typer.Option(..., "--key", "-k", help="Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória)."),
-    name: str = typer.Option(..., "--name", "-n", help="Nome do beneficiário."),
-    city: str = typer.Option(..., "--city", "-c", help="Cidade do beneficiário (maiúsculas, sem acentos)."),
+    key: str = typer.Option(..., "--key", "-k", help="Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória).", prompt=True),
+    name: str = typer.Option(..., "--name", "-n", help="Nome do beneficiário.", prompt=True),
+    city: str = typer.Option(..., "--city", "-c", help="Cidade do beneficiário (maiúsculas, sem acentos).", prompt=True),
     amount: Optional[float] = typer.Option(None, "--amount", "-a", help="Valor da transação. Ex: 10.50"),
     txid: str = typer.Option("***", "--txid", "-t", help="ID da transação (Transaction ID)."),
     info: Optional[str] = typer.Option(None, "--info", "-i", help="Informações adicionais para o pagador."),
@@ -129,7 +244,7 @@ def qrcode(
                 )
             )
 
-    except exceptions.ErroGeracaoPayloadError as e:
+    except exceptions.GeracaoPayloadError as e:
         console.print(panel("❌ Erro de Validação de Dados", f"Campo: [bold]{e.campo}[/bold]\nMotivo: {e.motivo}"))
         raise typer.Exit(code=1)
 
@@ -137,7 +252,7 @@ def qrcode(
         console.print(panel("❌ Chave PIX Inválida", f"{e}"))
         raise typer.Exit(code=1)
 
-    except exceptions.ErroProcessamentoImagemError as e:
+    except exceptions.ProcessamentoImagemError as e:
         console.print(panel("❌ Erro de Imagem", f"{e}"))
         raise typer.Exit(code=1)
 
