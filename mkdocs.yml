@@ -27,6 +27,7 @@ theme:
     - content.code.select
     - content.code.annotate
     - search.suggest
+    - navigation.footer
 
 markdown_extensions:
   - attr_list
@@ -59,3 +60,10 @@ plugins:
 extra:
   comandos:
     test: pytest
+  social:
+    - icon: simple/github
+      link: https://github.com/gustjose
+    - icon: simple/pypi
+      link: https://pypi.org/user/gustjose/
+
+copyright: Copyright &copy; 2025 Gustavo Carreiro

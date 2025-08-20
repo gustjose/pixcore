@@ -101,7 +101,7 @@ class Pix:
         
         return payload
     
-    def qrcode(self, caminho_logo: str = None, cor_qr: str = "black", cor_fundo: str = "white") -> Image.Image:
+    def qrcode(self, caminho_logo: str = None, cor_qr: str = "black", cor_fundo: str = "white", box_size: int = 10, border: int = 4) -> Image.Image:
         """
         Gera um objeto de imagem (Pillow) do QR Code a partir do payload.
 
@@ -112,6 +112,8 @@ class Pix:
                                     (ex: "navy") ou um código hexadecimal (ex: "#000080").
                                     Defaults to "black".
             cor_fundo (str, optional): A cor de fundo do QR Code. Defaults to "white".
+            box_size (int, optional): O tamanho em pixels de cada "box" do QR Code. Defaults to 10.
+            border (int, optional): A largura da borda em "boxes". Defaults to 4.
 
         Returns:
             Image.Image: Um objeto de imagem da biblioteca Pillow contendo o QR Code.
@@ -121,8 +123,8 @@ class Pix:
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_H,
-            box_size=10,
-            border=4,
+            box_size=box_size,
+            border=border,
         )
         qr.add_data(payload_str)
         qr.make(fit=True)
@@ -140,21 +142,21 @@ class Pix:
                 
                 img_qr.paste(logo, (pos_x, pos_y), mask=logo)
             except FileNotFoundError:
-                raise exceptions.ErroProcessamentoImagemError(
+                raise exceptions.ProcessamentoImagemError(
                     caminho_imagem=caminho_logo,
                     motivo="Arquivo não encontrado."
                 ) from None
             
             except Exception as e:
                 # Erro genérico de processamento.
-                raise exceptions.ErroProcessamentoImagemError(
+                raise exceptions.ProcessamentoImagemError(
                     caminho_imagem=caminho_logo,
                     motivo=f"Erro desconhecido ao processar o logo: {e}"
                 ) from e
         
         return img_qr
     
-    def save_qrcode(self, caminho_arquivo_saida: str, caminho_logo: str = None, cor_qr: str = "black", cor_fundo: str = "white"):
+    def save_qrcode(self, caminho_arquivo_saida: str, caminho_logo: str = None, cor_qr: str = "black", cor_fundo: str = "white", box_size: int = 10, border: int = 4):
         """
         Gera e salva a imagem do QR Code diretamente em um arquivo.
 
@@ -165,6 +167,8 @@ class Pix:
                                           centralizado no QR Code. Defaults to None.
             cor_qr (str, optional): A cor dos módulos do QR Code. Defaults to "black".
             cor_fundo (str, optional): A cor de fundo do QR Code. Defaults to "white".
+            box_size (int, optional): O tamanho em pixels de cada "box" do QR Code. Defaults to 10.
+            border (int, optional): A largura da borda em "boxes". Defaults to 4.
         
         Examples:
             >>> pix_data = PixData(...)
@@ -173,7 +177,13 @@ class Pix:
             QR Code salvo com sucesso em: meu_pix_qr.png
         """
         try:
-            imagem_qr = self.qrcode(caminho_logo=caminho_logo, cor_qr=cor_qr, cor_fundo=cor_fundo)
+            imagem_qr = self.qrcode(
+                caminho_logo=caminho_logo, 
+                cor_qr=cor_qr, 
+                cor_fundo=cor_fundo,
+                box_size=box_size,
+                border=border
+            )
             imagem_qr.save(caminho_arquivo_saida)
             return True
         except (IOError, PermissionError) as e:

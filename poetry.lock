@@ -1249,22 +1249,6 @@ pygments = ">=2.13.0,<3.0.0"
 jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
-name = "rich-pixels"
-version = "3.0.1"
-description = "A Rich-compatible library for writing pixel images and ASCII art to the terminal."
-optional = false
-python-versions = ">=3.8"
-groups = ["main"]
-files = [
-    {file = "rich_pixels-3.0.1-py3-none-any.whl", hash = "sha256:e82c5aa0d00885609675494f16e1ef814c68fa795634f1d6917cae9159b755e1"},
-    {file = "rich_pixels-3.0.1.tar.gz", hash = "sha256:4a81977d45437ce5009cdcaf70af80256c3bdfab870e87ab802c577ba4133235"},
-]
-
-[package.dependencies]
-pillow = ">=10.0.0"
-rich = ">=12.0.0"
-
-[[package]]
 name = "shellingham"
 version = "1.5.4"
 description = "Tool to Detect Surrounding Shell"
@@ -1475,4 +1459,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4.0"
-content-hash = "6eafdeb1da45427e39e8d9c8a2fa0503fd082bbce9eea102740acdeffada74e3"
+content-hash = "5221a089da282f8c732557510ee100a8ba1e2882ca14b30fdd30e0aedb0d1732"

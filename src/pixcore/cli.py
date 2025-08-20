@@ -5,7 +5,6 @@ from . import exceptions
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
-from rich_pixels import Pixels
 import pyfiglet
 
 __version__ = "0.1.2"
@@ -209,6 +208,7 @@ def qrcode(
     language: Optional[str] = typer.Option(None, "--lang", help="Idioma de preferência para dados alternativos (ex: pt_BR, en_US)."),
     alt_name: Optional[str] = typer.Option(None, "--alt-name", help="Nome alternativo do beneficiário (em outro idioma)."),
     alt_city: Optional[str] = typer.Option(None, "--alt-city", help="Cidade alternativa do beneficiário (em outro idioma)."),
+    caminho_logo: Optional[str] = typer.Option(None, "--logo", "-l", help="Caminho para um arquivo de imagem (ex: pasta/logo.png)")
 ):
     try:
         data = models.PixData(
@@ -231,18 +231,14 @@ def qrcode(
             if transacao.save_qrcode(caminho_arquivo_saida=output):
                 console.print(panel("✅ QR Code gerado com sucesso", f"QR Code salvo em: {output}", "green"))
         else:
-            imagem_pillow = transacao.qrcode()
-            pixels = Pixels.from_image(imagem_pillow)
-            
-            console.print(
-                Panel(
-                    pixels,
-                    title="[bold green]Escaneie o QR Code PIX[/bold green]",
-                    border_style="green",
-                    padding=0,
-                    expand=False
-                )
+            imagem_pillow = transacao.qrcode(
+                caminho_logo=caminho_logo, 
+                cor_qr="black", 
+                cor_fundo="white",
+                box_size=10,
+                border=4
             )
+            imagem_pillow.show()
 
     except exceptions.GeracaoPayloadError as e:
         console.print(panel("❌ Erro de Validação de Dados", f"Campo: [bold]{e.campo}[/bold]\nMotivo: {e.motivo}"))

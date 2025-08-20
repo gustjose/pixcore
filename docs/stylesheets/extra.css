@@ -66,9 +66,56 @@ div.mermaid {
   transform: translate(2px, 2px);
 }
 
-@media (min-width: 768px) {
+.doacao {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.qrcodeframe {
+  display: flex; 
+  justify-content: center; 
+  flex-direction: column; 
+  align-items: center;
+}
+
+.qrcodeframe img {
+  width: 25vh; 
+  height: auto; 
+  margin-bottom: 20px; 
+  margin-top:20px; 
+  border-radius: 5px; 
+  border: 2px 
+  solid #4e6877;
+}
+
+@media screen and (max-width:954px) {
   .button-74 {
     min-width: 120px;
     padding: 0 25px;
   }
+  .doacao {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .doacao > div:first-child {
+    margin-right: 0 !important; 
+    text-align: center;
+  }
+
+  .doacao p {
+    max-width: 100%;
+  }
+
+.qrcodeframe img {
+  width: 50vh; 
+  height: auto; 
+  margin-bottom: 20px; 
+  margin-top:20px; 
+  border-radius: 5px; 
+  border: 2px 
+  solid #4e6877;
+}
 }

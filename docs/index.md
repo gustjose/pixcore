@@ -43,14 +43,14 @@ Este é um projeto de código aberto, desenvolvido e mantido com dedicação no 
 
 Qualquer contribuição é muito bem-vinda e me ajuda a continuar dedicando tempo a este e outros projetos open source.
 
-<div style="display: flex; justify-content: space-between; @media (min-width: 768px) {flex-direction: column;}; margin-bottom: 20px;">
+<div class="doacao">
     <div style='margin-right: 5vh;'>
         <h3>Como Ajudar</h3>
         <p style='max-width: 65vh;'>A maneira mais simples e direta de apoiar é via Pix. Se você gostou do projeto e quiser recompensar o meu trabalho de desenvolvimento e contribuir com o projeto, basta ler o payload no qrcode ao lado ou copiar o código.</p>
         <p style='text-align: center; margin-top: 5vh; color: #17c1da;'><b>Muito Obrigado por Contribuir!</b></p>
     </div>
-    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-        <img src="assets/qrcode-pix.png" style='width: 25vh; height: auto; margin-bottom: 20px; margin-top:20px; border-radius: 5px; border: 2px solid #4e6877;'>
+    <div class="qrcodeframe">
+        <img src="assets/qrcode-pix.png">
         <button class="button-74" role="button" onclick="copyToClipboard('00020126580014BR.GOV.BCB.PIX01367a421430-e2a2-4d02-9f33-e1686abed2be5204000053039865802BR5901N6001C62110507PixCore630432B6', this)">Copiar PIX!</button>
     </div>
 </div>

@@ -77,7 +77,7 @@ class PixData:
     def __post_init__(self):
         
         if not self.recebedor_nome or len(self.recebedor_nome.encode('utf-8')) > 25 or len(self.recebedor_nome) < 3:
-            raise exceptions.GeracaoPayloadError(chave='recebedor_nome', motivo="O nome do recebedor (recebedor_nome) é obrigatório e deve ter entre 3 e 25 bytes.")
+            raise exceptions.GeracaoPayloadError(campo='recebedor_nome', motivo="O nome do recebedor (recebedor_nome) é obrigatório e deve ter entre 3 e 25 bytes.")
             
         if not self.recebedor_cidade or len(self.recebedor_cidade.encode('utf-8')) > 15 or len(self.recebedor_cidade) < 3:
             raise exceptions.GeracaoPayloadError('recebedor_cidade', "A cidade do recebedor (recebedor_cidade) é obrigatória e deve ter entre 3 e 15 bytes.")
