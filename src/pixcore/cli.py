@@ -2,21 +2,26 @@ import typer
 from typing import Optional
 from . import brcode, models
 from . import exceptions
+from . import decipher
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 import pyfiglet
-
-__version__ = "0.1.2"
+from importlib.metadata import version, PackageNotFoundError
 
 console = Console()
 app = typer.Typer(
     add_completion=False
 )
 
+try:
+    __version__ = version("pixcore")
+except PackageNotFoundError:
+    __version__ = "dev"
+
 def version_callback(value: bool):
     if value:
-        console.print(f"PixCore CLI Versão: {__version__}")
+        console.print(f"PixCore CLI Versão: [cyan][b]{__version__}")
         raise typer.Exit()
     
 def help_callback(value: bool):
@@ -42,6 +47,10 @@ def help_callback(value: bool):
     table_comandos.add_row(
         "qrcode", 
         "Gera um [b]QR Code PIX[/] e o exibe no terminal ou salva em um arquivo."
+    )
+    table_comandos.add_row(
+        "decode", 
+        "Decodifica uma string PIX 'Copia e Cola' e exibe seus dados."
     )
     
     table_global = Table(
@@ -260,5 +269,56 @@ def qrcode(
         console.print(panel("❌ Ocorreu um erro inesperado", f"{e}"))
         raise typer.Exit(code=1)
     
+@app.command(
+    help="Decodifica uma string PIX 'Copia e Cola' e exibe seus dados."
+)
+def decode(
+    payload: str = typer.Argument(..., help="A string do payload BR Code a ser decodificada.")
+):
+    
+    try:
+        dados_decodificados = decipher.decode(payload)
+        
+        tabela_resultados = Table(title="Dados do PIX", show_header=False)
+        tabela_resultados.add_column("Campo", style="cyan", no_wrap=True)
+        tabela_resultados.add_column("Valor", style="green")
+
+        mapa_nomes = {
+            "merchant_name": "Nome do Recebedor",
+            "merchant_city": "Cidade do Recebedor",
+            "pix_key": "Chave PIX",
+            "transaction_amount": "Valor",
+            "transaction_id": "ID da Transação (TXID)",
+            "merchant_category_code": "Cód. Categoria (MCC)",
+            "postal_code": "CEP",
+            "country_code": "País",
+            "gui": "GUI",
+        }
+
+        for chave, nome_amigavel in mapa_nomes.items():
+            if chave in dados_decodificados:
+                valor = dados_decodificados[chave]
+                
+                if chave == "transaction_amount":
+                    valor_str = f"R$ {valor:.2f}"
+                else:
+                    valor_str = str(valor)
+                    
+                tabela_resultados.add_row(nome_amigavel, valor_str)
+        
+        console.print(tabela_resultados)
+
+    except exceptions.CRCInvalidoError as e:
+        console.print(panel("❌ CRC Inválido", f"{e}\nO código pode estar corrompido ou foi alterado."))
+        raise typer.Exit(code=1)
+    
+    except exceptions.DecodificacaoPayloadError as e:
+        console.print(panel("❌ Erro de Decodificação", f"{e}\nA string fornecida não parece ser um PIX Copia e Cola válido."))
+        raise typer.Exit(code=1)
+
+    except Exception as e:
+        console.print(panel("❌ Ocorreu um erro inesperado", f"{e}"))
+        raise typer.Exit(code=1)
+
 if __name__ == "__main__":
     app()

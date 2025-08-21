@@ -1,3 +1,6 @@
+from typing import Generator, Tuple
+from . import exceptions
+
 def format_tlv(id_field: str, value: str) -> str:
     """
     Formata um campo no padrão TLV (Type-Length-Value).
@@ -56,3 +59,42 @@ def calculate_crc16(payload: str) -> str:
                 crc <<= 1
     
     return format(crc & 0xFFFF, 'X').zfill(4)
+
+def parse_tlv(payload: str) -> Generator[Tuple[str, int, str], None, None]:
+    """
+    Parseia uma string de payload no formato TLV e retorna os campos.
+
+    Esta função atua como um gerador, processando a string do payload
+    de forma iterativa. A cada iteração, ela lê um campo completo (ID, Tamanho, Valor)
+    e o retorna como uma tupla (ID, Tamanho, Valor).
+
+    Args:
+        payload (str): A string contendo múltiplos campos TLV concatenados.
+
+    Yields:
+        Generator[Tuple[str, int, str], None, None]: Uma tupla contendo (ID, Tamanho, Valor).
+    
+    Raises:
+        exceptions.DecodificacaoPayloadError: Se a string de tamanho (length)
+                                               não for um número válido, indicando
+                                               um payload malformado.
+    """
+    index = 0
+    while index < len(payload):
+        id_field = payload[index : index + 2]
+        index += 2
+
+        length_str = payload[index : index + 2]
+        index += 2
+        
+        try:
+            value_length = int(length_str)
+        except ValueError:
+            raise exceptions.DecodificacaoPayloadError(
+                f"Tamanho de campo inválido. Esperava um número, mas recebi '{length_str}'."
+            ) from None
+
+        value = payload[index : index + value_length]
+        index += value_length
+
+        yield (id_field, value_length,value)

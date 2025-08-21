@@ -88,3 +88,17 @@ class ErroDeESError(PixCoreError):
         self.caminho_arquivo: str = caminho_arquivo
         self.motivo: str = motivo
         super().__init__(f"Erro de E/S no arquivo '{caminho_arquivo}': {motivo}")
+
+class DecodificacaoPayloadError(PixCoreError):
+    """Levantado quando ocorre um erro ao decodificar um payload BRCode."""
+    def __init__(self, motivo: str):
+        self.motivo = motivo
+        super().__init__(f"Erro na decodificação do payload: {motivo}")
+
+class CRCInvalidoError(DecodificacaoPayloadError):
+    """Levantado quando o CRC16 do payload é inválido."""
+    def __init__(self, esperado: str, recebido: str):
+        self.esperado = esperado
+        self.recebido = recebido
+        mensagem = f"CRC16 inválido. Esperado: {esperado}, Recebido: {recebido}."
+        super().__init__(motivo=mensagem)
