@@ -1,4 +1,6 @@
 import typer
+import os
+import csv
 from typing import Optional
 from . import brcode, models
 from . import exceptions
@@ -52,6 +54,10 @@ def help_callback(value: bool):
     table_comandos.add_row(
         "decode", 
         "Decodifica uma string PIX 'Copia e Cola' e exibe seus dados."
+    )
+    table_comandos.add_row(
+        "lote", 
+        "Gera múltiplos QR Codes PIX a partir de um arquivo CSV."
     )
     table_comandos.add_row(
         "config", 
@@ -353,6 +359,81 @@ def decode(
         console.print(panel("❌ Ocorreu um erro inesperado", f"{e}"))
         raise typer.Exit(code=1)
 
+@app.command(
+    help="Gera múltiplos QR Codes PIX a partir de um arquivo CSV."
+)
+def lote(
+    arquivo_csv: str = typer.Argument(..., help="Caminho para o arquivo CSV com os dados."),
+    diretorio_saida: str = typer.Argument(..., help="Diretório onde os QR Codes serão salvos."),
+    key: str = typer.Option(None, "--key", "-k", help="Chave PIX padrão (usada se não especificada no CSV)."),
+    name: str = typer.Option(None, "--name", "-n", help="Nome do beneficiário padrão (usado se não especificado no CSV)."),
+    city: str = typer.Option(None, "--city", "-c", help="Cidade padrão do beneficiário (usada se não especificada no CSV)."),
+):
+    try:
+        config = config_manager.read_config()
+        os.makedirs(diretorio_saida, exist_ok=True)
+
+        with open(arquivo_csv, mode='r', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            
+            console.rule(f'Geração em Lote - [cyan]{arquivo_csv}', style='blue')
+            console.print('')
+            
+            for i, row in enumerate(reader):
+                linha_num = i + 2
+                try:
+                    final_key = row.get('chave') or key or config.get('default', 'key', fallback=None)
+                    final_name = row.get('nome') or name or config.get('default', 'name', fallback=None)
+                    final_city = row.get('cidade') or city or config.get('default', 'city', fallback=None)
+                    
+                    amount_str = row.get('valor')
+                    txid = row.get('txid')
+
+                    if not all([final_key, final_name, final_city, amount_str, txid]):
+                        console.print(panel(f"⚠️ Linha {linha_num} Ignorada", "Dados essenciais (chave, nome, cidade, valor, txid) estão faltando."))
+                        continue
+                    
+                    try:
+                        amount = float(amount_str.replace(',', '.'))
+                    except (ValueError, TypeError):
+                        console.print(panel(f"⚠️ Linha {linha_num} Ignorada", f"Valor '[bold]{amount_str}[/]' é inválido."))
+                        continue
+
+                    info = row.get('info_adicional')
+                    cep = row.get('cep')
+                    mcc = row.get('mcc', '0000')
+
+                    data = models.PixData(
+                        recebedor_nome=final_name,
+                        recebedor_cidade=final_city,
+                        pix_key=final_key,
+                        valor=amount,
+                        transacao_id=txid,
+                        receptor_categoria_code=mcc,
+                        recebedor_cep=cep,
+                        info_adicional=info,
+                    )
+                    
+                    transacao = brcode.Pix(data)
+                    nome_arquivo = f"{txid}.png"
+                    caminho_arquivo = os.path.join(diretorio_saida, nome_arquivo)
+                    
+                    if transacao.save_qrcode(caminho_arquivo_saida=caminho_arquivo):
+                        console.print(f"  ✅ [green]Sucesso:[/] QR Code para txid '[bold]{txid}[/]'")
+                    
+                except Exception as e:
+                    console.print(panel(f"❌ Erro na Linha {linha_num}", f"Não foi possível gerar o QR Code para txid '[bold]{txid}[/]'.\nMotivo: {e}"))
+
+        console.print('')
+        console.print(panel("✅ Geração em lote concluída!", f"QR Codes salvos em: [cyan]{diretorio_saida}", "green"))
+
+    except FileNotFoundError:
+        console.print(panel("❌ Arquivo não encontrado", f"O arquivo [bold]{arquivo_csv}[/] não foi encontrado."))
+        raise typer.Exit(code=1)
+    except Exception as e:
+        console.print(panel("❌ Ocorreu um erro inesperado no processamento em lote", f"{e}"))
+        raise typer.Exit(code=1)
+
 # ==============================================================================
 # App de Configurações
 # ==============================================================================
@@ -440,7 +521,6 @@ def main_config_app(
     if ctx.invoked_subcommand is None:
         help_callback_config(True)
 
-
 @config_app.command("set", help="Define um valor de configuração. Ex: 'pixcore config set name \"Meu Nome\"'")
 def config_set(
     key: str = typer.Argument(..., help="A chave de configuração (ex: name, city, key)."),
@@ -453,7 +533,6 @@ def config_set(
 
     config_manager.set_value('default', key, value)
     console.print(Panel(f"✅ Configuração '[cyan]{key}[/]' salva como '[green]{value}[/]'.", expand=False))
-
 
 @config_app.command("show", help="Mostra todas as configurações salvas.")
 def config_show():

@@ -1,4 +1,5 @@
 import pytest
+import csv
 from typer.testing import CliRunner
 from src.pixcore.cli import app
 from pathlib import Path
@@ -43,6 +44,29 @@ def isolated_config(tmp_path: Path, monkeypatch):
         )
 
     return temp_config_file
+
+@pytest.fixture
+def csv_valido(tmp_path: Path):
+    """Cria um arquivo CSV válido para os testes de lote."""
+    csv_path = tmp_path / "cobrancas.csv"
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["valor", "txid", "nome", "cidade", "chave"])
+        writer.writerow(["10.50", "TXID001", "CLIENTE A", "SAO PAULO", "chave1@pix.com"])
+        writer.writerow(["25.00", "TXID002", "CLIENTE B", "RIO DE JANEIRO", "chave2@pix.com"])
+    return csv_path
+
+@pytest.fixture
+def csv_com_erros(tmp_path: Path):
+    """Cria um CSV com uma linha válida e uma com valor inválido."""
+    csv_path = tmp_path / "cobrancas_erradas.csv"
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["valor", "txid", "nome", "cidade", "chave"])
+        writer.writerow(["15.75", "TXIDVALIDO", "CLIENTE OK", "RECIFE", "chave_ok@pix.com"])
+        writer.writerow(["abc", "TXIDINVALIDO", "CLIENTE RUIM", "SALVADOR", "chave_ruim@pix.com"])
+        writer.writerow(["50.00", "TXIDVALIDO2", "CLIENTE OK 2", "MANAUS", "chave_ok2@pix.com"])
+    return csv_path
 
 def test_cli_payload_sucesso(pix_args):
     """
@@ -136,3 +160,87 @@ def test_config_show_sem_configuracao(isolated_config):
     
     assert result.exit_code == 0
     assert "Nenhuma configuração salva encontrada" in result.stdout
+
+def test_lote_sucesso(csv_valido, tmp_path: Path):
+    """
+    Verifica se o comando 'lote' gera todos os QR Codes de um CSV válido.
+    """
+    output_dir = tmp_path / "qrcodes"
+    
+    result = runner.invoke(app, ["lote", str(csv_valido), str(output_dir)])
+    
+    assert result.exit_code == 0
+    assert "Geração em lote concluída" in result.stdout
+    assert (output_dir / "TXID001.png").exists()
+    assert (output_dir / "TXID002.png").exists()
+    arquivos_gerados = list(output_dir.glob("*.png"))
+    assert len(arquivos_gerados) == 2
+
+def test_lote_cria_diretorio_saida(csv_valido, tmp_path: Path):
+    """
+    Verifica se o comando 'lote' cria o diretório de saída se ele não existir.
+    """
+    output_dir = tmp_path / "novo_diretorio"
+    assert not output_dir.exists()
+    
+    result = runner.invoke(app, ["lote", str(csv_valido), str(output_dir)])
+    
+    assert result.exit_code == 0
+    assert output_dir.exists()
+    assert output_dir.is_dir()
+
+def test_lote_arquivo_csv_nao_encontrado(tmp_path: Path):
+    """
+    Verifica se o comando falha com uma mensagem clara se o CSV não for encontrado.
+    """
+    output_dir = tmp_path / "qrcodes"
+    arquivo_inexistente = "nao_existe.csv"
+    
+    result = runner.invoke(app, ["lote", arquivo_inexistente, str(output_dir)])
+    
+    assert result.exit_code == 1
+    assert "Arquivo não encontrado" in result.stdout
+    assert arquivo_inexistente in result.stdout
+
+def test_lote_pula_linha_com_valor_invalido(csv_com_erros, tmp_path: Path):
+    """
+    Verifica se o comando ignora linhas com dados inválidos e continua o processo.
+    """
+    output_dir = tmp_path / "qrcodes_erros"
+    
+    result = runner.invoke(app, ["lote", str(csv_com_erros), str(output_dir)])
+    
+    assert result.exit_code == 0
+    assert "Geração em lote concluída" in result.stdout
+    
+    assert "Valor 'abc' é inválido" in result.stdout
+    
+    assert (output_dir / "TXIDVALIDO.png").exists()
+    assert (output_dir / "TXIDVALIDO2.png").exists()
+    
+    assert not (output_dir / "TXIDINVALIDO.png").exists()
+
+    arquivos_gerados = list(output_dir.glob("*.png"))
+    assert len(arquivos_gerados) == 2
+
+def test_lote_fallback_para_config(tmp_path: Path, isolated_config):
+    """
+    Verifica se o 'lote' usa valores da configuração quando faltam no CSV.
+    """
+    runner.invoke(app, ["config", "set", "name", "Nome Padrao Global"])
+    runner.invoke(app, ["config", "set", "city", "CIDADE PADRAO"])
+    runner.invoke(app, ["config", "set", "key", "chave@padrao.com"])
+
+    csv_path = tmp_path / "cobrancas_minimas.csv"
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["valor", "txid"])
+        writer.writerow(["99.99", "TXIDMINIMO"])
+
+    output_dir = tmp_path / "qrcodes_config"
+    
+    result = runner.invoke(app, ["lote", str(csv_path), str(output_dir)])
+    
+    assert result.exit_code == 0, result.stdout
+    assert "Geração em lote concluída" in result.stdout
+    assert (output_dir / "TXIDMINIMO.png").exists()
