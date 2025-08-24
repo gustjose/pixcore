@@ -2,6 +2,7 @@ import pytest
 from typer.testing import CliRunner
 from src.pixcore.cli import app
 from pathlib import Path
+import configparser
 
 runner = CliRunner()
 
@@ -22,6 +23,26 @@ def pix_args():
         "--alt-name", "Example Company Inc.",
         "--alt-city", "SAO PAULO",
     ]
+
+@pytest.fixture
+def isolated_config(tmp_path: Path, monkeypatch):
+    """
+    Fixture que isola o ambiente de configuração.
+
+    Usa monkeypatch para redirecionar o typer.get_app_dir para um
+    diretório temporário, garantindo que os testes não afetem a
+    configuração real do usuário.
+    """
+    temp_config_file = tmp_path / "config.ini"
+    try:
+        monkeypatch.setattr("src.pixcore.config_manager.CONFIG_FILE", temp_config_file)
+    except AttributeError:
+        pytest.fail(
+            "Não foi possível aplicar o patch em 'src.pixcore.config_manager.CONFIG_FILE'. "
+            "Verifique se o caminho do módulo e o nome da variável estão corretos."
+        )
+
+    return temp_config_file
 
 def test_cli_payload_sucesso(pix_args):
     """
@@ -62,3 +83,56 @@ def test_cli_decode_sucesso(pix_args):
     assert "01001000" in result.stdout
     assert "BR" in result.stdout
     assert "BR.GOV.BCB.PIX" in result.stdout
+
+# ==============================================================================
+# Testes para o subcomando 'config'
+# ==============================================================================
+
+def test_config_set_sucesso(isolated_config):
+    """
+    Verifica se o comando 'config set' salva corretamente uma configuração.
+    """
+    config_file = isolated_config
+    
+    result = runner.invoke(app, ["config", "set", "name", "Meu Nome Salvo"])
+    
+    assert result.exit_code == 0
+    assert "Configuração 'name' salva como 'Meu Nome Salvo'" in result.stdout
+    
+    assert config_file.exists()
+    
+    parser = configparser.ConfigParser()
+    parser.read(config_file)
+    assert parser.get('default', 'name') == 'Meu Nome Salvo'
+
+def test_config_show_sucesso(isolated_config):
+    """
+    Verifica se o comando 'config show' exibe as configurações salvas.
+    """
+    runner.invoke(app, ["config", "set", "name", "Usuario Teste"])
+    runner.invoke(app, ["config", "set", "city", "CIDADE TESTE"])
+    
+    result = runner.invoke(app, ["config", "show"])
+    
+    assert result.exit_code == 0
+    assert "Configurações Salvas" in result.stdout
+    assert "Usuario Teste" in result.stdout
+    assert "CIDADE TESTE" in result.stdout
+
+def test_config_set_chave_invalida(isolated_config):
+    """
+    Verifica se o comando 'config set' falha ao tentar usar uma chave inválida.
+    """
+    result = runner.invoke(app, ["config", "set", "chave_invalida", "valor"])
+    
+    assert result.exit_code == 1
+    assert "Chave 'chave_invalida' inválida" in result.stdout
+
+def test_config_show_sem_configuracao(isolated_config):
+    """
+    Verifica a saída do comando 'config show' quando não há configurações salvas.
+    """
+    result = runner.invoke(app, ["config", "show"])
+    
+    assert result.exit_code == 0
+    assert "Nenhuma configuração salva encontrada" in result.stdout

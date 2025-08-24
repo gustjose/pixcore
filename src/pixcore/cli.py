@@ -3,6 +3,7 @@ from typing import Optional
 from . import brcode, models
 from . import exceptions
 from . import decipher
+from . import config_manager
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
@@ -51,6 +52,10 @@ def help_callback(value: bool):
     table_comandos.add_row(
         "decode", 
         "Decodifica uma string PIX 'Copia e Cola' e exibe seus dados."
+    )
+    table_comandos.add_row(
+        "config", 
+        "Gerencia as configurações padrão da aplicação."
     )
     
     table_global = Table(
@@ -146,9 +151,9 @@ def main(
     help="Gera um payload PIX no formato TLV (Copia e Cola).",
 )
 def payload(
-    key: str = typer.Option(..., "--key", "-k", help="Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória).", prompt=True),
-    name: str = typer.Option(..., "--name", "-n", help="Nome do beneficiário.", prompt=True),
-    city: str = typer.Option(..., "--city", "-c", help="Cidade do beneficiário (maiúsculas, sem acentos).", prompt=True),
+    key: str = typer.Option(None, "--key", "-k", help="Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória)."),
+    name: str = typer.Option(None, "--name", "-n", help="Nome do beneficiário."),
+    city: str = typer.Option(None, "--city", "-c", help="Cidade do beneficiário (maiúsculas, sem acentos)."),
     amount: Optional[float] = typer.Option(None, "--amount", "-a", help="Valor da transação. Ex: 10.50"),
     txid: str = typer.Option("***", "--txid", "-t", help="ID da transação (Transaction ID)."),
     info: Optional[str] = typer.Option(None, "--info", "-i", help="Informações adicionais para o pagador."),
@@ -160,10 +165,24 @@ def payload(
     alt_city: Optional[str] = typer.Option(None, "--alt-city", help="Cidade alternativa do beneficiário (em outro idioma)."),
 ):
     try:
+        config = config_manager.read_config()
+        
+        final_key = key or config.get('default', 'key', fallback=None)
+        if not final_key:
+            final_key = typer.prompt("Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória)")
+        
+        final_name = name or config.get('default', 'name', fallback=None)
+        if not final_name:
+            final_name = typer.prompt("Nome do beneficiário")
+
+        final_city = city or config.get('default', 'city', fallback=None)
+        if not final_city:
+            final_city = typer.prompt("Cidade do beneficiário (maiúsculas, sem acentos)")
+
         data = models.PixData(
-            recebedor_nome=name,
-            recebedor_cidade=city,
-            pix_key=key,
+            recebedor_nome=final_name,
+            recebedor_cidade=final_city,
+            pix_key=final_key,
             valor=amount,
             transacao_id=txid,
             ponto_iniciacao_metodo=initiation_method,
@@ -205,9 +224,9 @@ def payload(
 )
 def qrcode(
     output: Optional[str] = typer.Option(None, "--output", "-o", help="Caminho e nome do arquivo de saída (ex: 'output/pix.png')."),
-    key: str = typer.Option(..., "--key", "-k", help="Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória).", prompt=True),
-    name: str = typer.Option(..., "--name", "-n", help="Nome do beneficiário.", prompt=True),
-    city: str = typer.Option(..., "--city", "-c", help="Cidade do beneficiário (maiúsculas, sem acentos).", prompt=True),
+    key: str = typer.Option(None, "--key", "-k", help="Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória)."),
+    name: str = typer.Option(None, "--name", "-n", help="Nome do beneficiário."),
+    city: str = typer.Option(None, "--city", "-c", help="Cidade do beneficiário (maiúsculas, sem acentos)."),
     amount: Optional[float] = typer.Option(None, "--amount", "-a", help="Valor da transação. Ex: 10.50"),
     txid: str = typer.Option("***", "--txid", "-t", help="ID da transação (Transaction ID)."),
     info: Optional[str] = typer.Option(None, "--info", "-i", help="Informações adicionais para o pagador."),
@@ -220,10 +239,24 @@ def qrcode(
     caminho_logo: Optional[str] = typer.Option(None, "--logo", "-l", help="Caminho para um arquivo de imagem (ex: pasta/logo.png)")
 ):
     try:
+        config = config_manager.read_config()
+
+        final_key = key or config.get('default', 'key', fallback=None)
+        if not final_key:
+            final_key = typer.prompt("Chave PIX (CPF/CNPJ, e-mail, celular ou aleatória)")
+
+        final_name = name or config.get('default', 'name', fallback=None)
+        if not final_name:
+            final_name = typer.prompt("Nome do beneficiário")
+
+        final_city = city or config.get('default', 'city', fallback=None)
+        if not final_city:
+            final_city = typer.prompt("Cidade do beneficiário (maiúsculas, sem acentos)")
+
         data = models.PixData(
-            recebedor_nome=name,
-            recebedor_cidade=city,
-            pix_key=key,
+            recebedor_nome=final_name,
+            recebedor_cidade=final_city,
+            pix_key=final_key,
             valor=amount,
             transacao_id=txid,
             ponto_iniciacao_metodo=initiation_method,
@@ -319,6 +352,125 @@ def decode(
     except Exception as e:
         console.print(panel("❌ Ocorreu um erro inesperado", f"{e}"))
         raise typer.Exit(code=1)
+
+# ==============================================================================
+# App de Configurações
+# ==============================================================================
+
+config_app = typer.Typer(
+    help="Gerencia as configurações padrão da aplicação.",
+    add_completion=False
+)
+app.add_typer(config_app, name="config")
+
+def help_callback_config(value: bool):
+    if not value:
+        return
+
+    table_comandos = Table(
+        show_header=False, 
+        header_style="bold magenta",
+        padding=(0, 1),
+        box=None
+    )
+
+    table_comandos.add_column("Comando / Opção", style="cyan", no_wrap=True, width=10)
+    table_comandos.add_column("Descrição", width=75)
+
+    # Seção de Comandos
+    table_comandos.add_section()
+    table_comandos.add_row(
+        "set",
+        "Define um valor de configuração. Ex: 'pixcore config set name \"Meu Nome\"'"
+    )
+    table_comandos.add_row(
+        "show",
+        "Mostra todas as configurações salvas."
+    )
+    
+    table_global = Table(
+        show_header=False, 
+        header_style="bold magenta",
+        padding=(0, 1),
+        box=None
+    )
+
+    table_global.add_column("Comando / Opção", style="cyan", no_wrap=True, width=10)
+    table_global.add_column("Atalhos", style="green", width=15)
+    table_global.add_column("Descrição", width=60)
+
+    table_global.add_section()
+    table_global.add_row(
+        "--help", 
+        "-h", 
+        "Mostra esta mensagem de ajuda detalhada."
+    )
+    
+    console.print(
+        Panel(
+            table_comandos,
+            title="Comandos",
+            expand=False,
+            title_align='left',
+        )
+    )
+
+    console.print(
+        Panel(
+            table_global,
+            title="Opções Globais",
+            expand=False,
+            title_align='left',
+        ))
+
+    console.print("Para ajuda sobre um comando específico, use: [b][yellow]pixcore config [NOME_DO_COMANDO] --help[/]\n")
+    raise typer.Exit()
+
+@config_app.callback(invoke_without_command=True)
+def main_config_app(
+    ctx: typer.Context,
+    help: Optional[bool] = typer.Option(
+        None,
+        "--help", "-h",
+        callback=help_callback_config,
+        is_eager=True,
+        help="Mostra a mensagem de ajuda customizada.",
+    )
+):
+    if ctx.invoked_subcommand is None:
+        help_callback_config(True)
+
+
+@config_app.command("set", help="Define um valor de configuração. Ex: 'pixcore config set name \"Meu Nome\"'")
+def config_set(
+    key: str = typer.Argument(..., help="A chave de configuração (ex: name, city, key)."),
+    value: str = typer.Argument(..., help="O valor a ser salvo."),
+):
+    chaves_validas = ["name", "city", "key"]
+    if key not in chaves_validas:
+        console.print(Panel(f"❌ Chave '[bold red]{key}[/]' inválida. Use uma das seguintes: {chaves_validas}", expand=False))
+        raise typer.Exit(code=1)
+
+    config_manager.set_value('default', key, value)
+    console.print(Panel(f"✅ Configuração '[cyan]{key}[/]' salva como '[green]{value}[/]'.", expand=False))
+
+
+@config_app.command("show", help="Mostra todas as configurações salvas.")
+def config_show():
+    """Exibe as configurações atuais."""
+    configs = config_manager.get_config_as_dict()
+    if not configs or 'default' not in configs:
+        console.print("[yellow]Nenhuma configuração salva encontrada.[/yellow]")
+        return
+
+    table = Table(title="Configurações Salvas")
+    table.add_column("Chave", style="cyan")
+    table.add_column("Valor", style="green")
+
+    for key, value in configs['default'].items():
+        table.add_row(key, value)
+    
+    console.print(table)
 
 if __name__ == "__main__":
     app()
