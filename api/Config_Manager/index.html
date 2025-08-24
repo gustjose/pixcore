@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../Config_Manager/">
+        <link rel="prev" href="../CLI/">
       
       
-        <link rel="next" href="../Decodificar/">
+        <link rel="next" href="../Constantes/">
       
       
       <link rel="icon" href="../../assets/favicon.ico">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Constantes - PixCore</title>
+        <title>Config Manager - PixCore</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pixcore.constants" class="md-skip">
+        <a href="#pixcore.config_manager" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Constantes
+              Config Manager
             
           </span>
         </div>
@@ -472,29 +472,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../Config_Manager/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Config Manager
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -510,7 +487,7 @@
   
   
   <span class="md-ellipsis">
-    Constantes
+    Config Manager
     
   </span>
   
@@ -523,7 +500,7 @@
   
   
   <span class="md-ellipsis">
-    Constantes
+    Config Manager
     
   </span>
   
@@ -544,9 +521,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#pixcore.constants" class="md-nav__link">
+  <a href="#pixcore.config_manager" class="md-nav__link">
     <span class="md-ellipsis">
-      constants
+      config_manager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixcore.config_manager.get_config_as_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_config_as_dict
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixcore.config_manager.read_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      read_config
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixcore.config_manager.set_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_value
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixcore.config_manager.write_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_config
     </span>
   </a>
   
@@ -556,6 +569,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Constantes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Constantes
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -731,9 +767,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#pixcore.constants" class="md-nav__link">
+  <a href="#pixcore.config_manager" class="md-nav__link">
     <span class="md-ellipsis">
-      constants
+      config_manager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixcore.config_manager.get_config_as_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_config_as_dict
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixcore.config_manager.read_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      read_config
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixcore.config_manager.set_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_value
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pixcore.config_manager.write_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_config
     </span>
   </a>
   
@@ -758,21 +830,14 @@
   
 
 
-  <h1>Constantes</h1>
+  <h1>Config Manager</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="pixcore.constants"></a>
+<a id="pixcore.config_manager"></a>
     <div class="doc doc-contents first">
-
-        <p>Módulo de Constantes para o BR Code Pix.</p>
-<p>Este arquivo centraliza todos os identificadores (IDs/Tags) e valores fixos
-utilizados na construção do payload do BR Code, conforme as especificações
-do padrão EMV® Merchant Presented Mode (MPM) utilizado pelo Pix.</p>
-<p>A centralização desses valores facilita a manutenção e garante consistência
-na geração do código.</p>
 
 
 
@@ -791,6 +856,132 @@ na geração do código.</p>
 
 
 
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="pixcore.config_manager.get_config_as_dict" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_config_as_dict</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retorna todas as configurações como um dicionário.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>src\pixcore\config_manager.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_config_as_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retorna todas as configurações como um dicionário.&quot;&quot;&quot;</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="n">config</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">()</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="k">return</span> <span class="p">{</span><span class="n">section</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">section</span><span class="p">))</span> <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">sections</span><span class="p">()}</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="pixcore.config_manager.read_config" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">read_config</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Lê o arquivo de configuração e retorna um objeto ConfigParser.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>src\pixcore\config_manager.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">:</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Lê o arquivo de configuração e retorna um objeto ConfigParser.&quot;&quot;&quot;</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="n">_ensure_config_exists</span><span class="p">()</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">CONFIG_FILE</span><span class="p">)</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="k">return</span> <span class="n">config</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="pixcore.config_manager.set_value" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_value</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Define um valor em uma determinada seção do arquivo de configuração.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>src\pixcore\config_manager.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">set_value</span><span class="p">(</span><span class="n">section</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Define um valor em uma determinada seção do arquivo de configuração.&quot;&quot;&quot;</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="n">config</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">()</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>        <span class="n">config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a>    <span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="n">write_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="pixcore.config_manager.write_config" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">write_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Escreve o objeto ConfigParser de volta no arquivo.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>src\pixcore\config_manager.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="k">def</span><span class="w"> </span><span class="nf">write_config</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">):</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Escreve o objeto ConfigParser de volta no arquivo.&quot;&quot;&quot;</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">CONFIG_FILE</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">configfile</span><span class="p">:</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>        <span class="n">config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">configfile</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
 
 
 
@@ -828,7 +1019,7 @@ na geração do código.</p>
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../Config_Manager/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Config Manager">
+          <a href="../CLI/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: CLI">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -838,20 +1029,20 @@ na geração do código.</p>
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Config Manager
+                CLI
               </div>
             </div>
           </a>
         
         
           
-          <a href="../Decodificar/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Decodificar">
+          <a href="../Constantes/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Constantes">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Decodificar
+                Constantes
               </div>
             </div>
             <div class="md-footer__button md-icon">
