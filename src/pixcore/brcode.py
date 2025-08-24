@@ -117,6 +117,10 @@ class Pix:
 
         Returns:
             Image.Image: Um objeto de imagem da biblioteca Pillow contendo o QR Code.
+
+        Raises:
+            exceptions.ProcessamentoImagemError: Se ocorrer um erro ao processar o
+                                                 arquivo de logo (ex: não encontrado, corrompido).
         """
         payload_str = self.payload()
         
@@ -170,11 +174,16 @@ class Pix:
             box_size (int, optional): O tamanho em pixels de cada "box" do QR Code. Defaults to 10.
             border (int, optional): A largura da borda em "boxes". Defaults to 4.
         
+        Raises:
+            exceptions.ErroDeESError: Se ocorrer um erro ao salvar o arquivo
+                                      (ex: permissão negada, caminho inválido).
+            exceptions.ProcessamentoImagemError: Se ocorrer um erro ao processar o
+                                                 arquivo de logo.
+
         Examples:
             >>> pix_data = PixData(...)
             >>> pix_generator = Pix(pix_data)
             >>> pix_generator.save_qrcode("meu_pix_qr.png", caminho_logo="logo.png")
-            QR Code salvo com sucesso em: meu_pix_qr.png
         """
         try:
             imagem_qr = self.qrcode(

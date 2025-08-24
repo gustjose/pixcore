@@ -23,11 +23,13 @@ except PackageNotFoundError:
     __version__ = "dev"
 
 def version_callback(value: bool):
+    """Exibe a versão do programa e encerra."""
     if value:
         console.print(f"PixCore CLI Versão: [cyan][b]{__version__}")
         raise typer.Exit()
     
 def help_callback(value: bool):
+    """Exibe a tela de ajuda customizada e encerra."""
     if not value:
         return
 
@@ -119,6 +121,7 @@ def help_callback(value: bool):
     raise typer.Exit()
 
 def panel(titulo, mensagem, color="red"):
+    """Cria um painel formatado para exibição de mensagens."""
     return Panel(
         renderable=mensagem,
         title=titulo,
@@ -170,6 +173,25 @@ def payload(
     alt_name: Optional[str] = typer.Option(None, "--alt-name", help="Nome alternativo do beneficiário (em outro idioma)."),
     alt_city: Optional[str] = typer.Option(None, "--alt-city", help="Cidade alternativa do beneficiário (em outro idioma)."),
 ):
+    """
+    Gera e exibe o payload PIX no formato 'Copia e Cola' (BR Code TLV).
+
+    Este comando monta a string de pagamento completa, que pode ser copiada e colada
+    em um aplicativo de banco para efetuar o pagamento. É a base para a geração
+    do QR Code.
+
+    Se os dados essenciais (chave, nome, cidade) não forem fornecidos através das
+    opções ou de um arquivo de configuração, o comando solicitará interativamente
+    que sejam digitados.
+
+    Exemplos de uso:
+
+    - Gerar um payload com valor definido:
+        $ pixcore payload --key "seu-email@exemplo.com" --name "Nome Completo" --city "SAO PAULO" --amount 19.99
+
+    - Gerar um payload com valor aberto (a ser digitado pelo pagador):
+        $ pixcore payload -k "12345678900" -n "Nome Completo" -c "SAO PAULO" --txid "PEDIDO123"
+    """
     try:
         config = config_manager.read_config()
         
@@ -244,6 +266,28 @@ def qrcode(
     alt_city: Optional[str] = typer.Option(None, "--alt-city", help="Cidade alternativa do beneficiário (em outro idioma)."),
     caminho_logo: Optional[str] = typer.Option(None, "--logo", "-l", help="Caminho para um arquivo de imagem (ex: pasta/logo.png)")
 ):
+    """
+    Gera um QR Code PIX, salvando em arquivo ou exibindo na tela.
+
+    Este comando cria a imagem do QR Code a partir dos dados fornecidos. Possui dois
+    modos de operação:
+
+    1.  Padrão: Se a opção '--output' não for usada, a imagem do QR Code será
+        aberta no visualizador de imagens padrão do seu sistema operacional.
+
+    2.  Salvar em arquivo: Ao usar a opção '--output', a imagem é salva no
+        caminho especificado. O formato é inferido pela extensão do arquivo (ex: .png).
+
+    É possível customizar o QR Code, por exemplo, adicionando um logo no centro.
+
+    Exemplos de uso:
+
+    - Gerar e exibir um QR Code simples na tela:
+        $ pixcore qrcode -k "chave-pix" -n "Nome" -c "CIDADE" -a 50.00
+
+    - Salvar um QR Code com logo em um arquivo específico:
+        $ pixcore qrcode -k "chave-pix" -n "Nome" -c "CIDADE" -a 123.45 --logo "logo.png" --output "pix_pagamento.png"
+    """
     try:
         config = config_manager.read_config()
 
@@ -276,7 +320,10 @@ def qrcode(
         
         transacao = brcode.Pix(data)
         if output:
-            if transacao.save_qrcode(caminho_arquivo_saida=output):
+            output_dir = os.path.dirname(output)
+            if output_dir:
+                os.makedirs(output_dir, exist_ok=True)
+            if transacao.save_qrcode(caminho_arquivo_saida=output, caminho_logo=caminho_logo):
                 console.print(panel("✅ QR Code gerado com sucesso", f"QR Code salvo em: {output}", "green"))
         else:
             imagem_pillow = transacao.qrcode(
@@ -314,7 +361,19 @@ def qrcode(
 def decode(
     payload: str = typer.Argument(..., help="A string do payload BR Code a ser decodificada.")
 ):
-    
+    """
+    Decodifica um payload PIX ('Copia e Cola') e exibe seus dados de forma legível.
+
+    Este comando é útil para verificar a integridade e o conteúdo de um código PIX.
+    Ele recebe a string do payload, valida seu código de verificação (CRC16) e, se
+    válido, extrai e exibe todas as informações em uma tabela organizada, como nome
+    do recebedor, valor, chave e cidade.
+
+    Exemplo de uso:
+
+    - Decodificar um payload recebido:
+        $ pixcore decode "00020126580014br.gov.bcb.pix0136..."
+    """
     try:
         dados_decodificados = decipher.decode(payload)
         
@@ -369,6 +428,26 @@ def lote(
     name: str = typer.Option(None, "--name", "-n", help="Nome do beneficiário padrão (usado se não especificado no CSV)."),
     city: str = typer.Option(None, "--city", "-c", help="Cidade padrão do beneficiário (usada se não especificada no CSV)."),
 ):
+    """
+    Processa um arquivo CSV para gerar múltiplos QR Codes PIX de uma só vez.
+
+    Este comando é ideal para casos de uso que exigem a geração de cobranças em massa.
+    Ele lê um arquivo CSV, onde cada linha representa um PIX a ser gerado, e salva
+    os QR Codes resultantes em um diretório de saída.
+
+    O arquivo CSV deve conter, no mínimo, as colunas: `valor` e `txid`.
+    Outras colunas como `chave`, `nome`, `cidade`, `info_adicional`, `cep` e `mcc`
+    podem ser incluídas para sobrescrever os valores padrão. Se `chave`, `nome` ou `cidade`
+    não estiverem no CSV, serão usados os valores passados como opção ou do arquivo de configuração.
+
+    Os arquivos de imagem gerados serão nomeados com o valor da coluna 'txid' de cada linha
+    (ex: `[txid].png`).
+
+    Exemplo de uso:
+
+    - Gerar QR Codes a partir de 'cobrancas.csv' e salvar na pasta 'qrcodes/':
+        $ pixcore lote "cobrancas.csv" "qrcodes/" --name "Minha Empresa" --city "RIO DE JANEIRO" --key "meu-cnpj"
+    """
     try:
         config = config_manager.read_config()
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -526,6 +605,23 @@ def config_set(
     key: str = typer.Argument(..., help="A chave de configuração (ex: name, city, key)."),
     value: str = typer.Argument(..., help="O valor a ser salvo."),
 ):
+    """
+    Define e salva um par chave/valor na configuração padrão da aplicação.
+
+    Use este comando para salvar valores que você usa com frequência, como seu nome,
+    cidade ou chave PIX principal. Uma vez salvas, essas configurações serão usadas
+    como padrão em outros comandos, evitando que você precise digitá-las toda vez.
+
+    As chaves de configuração válidas são: 'name', 'city' e 'key'.
+
+    Exemplos de uso:
+
+    - Salvar seu nome padrão:
+        $ pixcore config set name "Meu Nome Completo"
+
+    - Salvar sua chave PIX principal:
+        $ pixcore config set key "minha-chave-aleatoria"
+    """
     chaves_validas = ["name", "city", "key"]
     if key not in chaves_validas:
         console.print(Panel(f"❌ Chave '[bold red]{key}[/]' inválida. Use uma das seguintes: {chaves_validas}", expand=False))
@@ -536,7 +632,18 @@ def config_set(
 
 @config_app.command("show", help="Mostra todas as configurações salvas.")
 def config_show():
-    """Exibe as configurações atuais."""
+    """
+    Exibe as configurações atuais salvas em uma tabela.
+
+    Este comando lê o arquivo de configuração e mostra os valores padrão que estão
+    sendo utilizados pela aplicação. É útil para verificar quais dados estão
+    configurados antes de gerar novos códigos PIX.
+
+    Exemplo de uso:
+
+    - Ver as configurações salvas:
+        $ pixcore config show
+    """
     configs = config_manager.get_config_as_dict()
     if not configs or 'default' not in configs:
         console.print("[yellow]Nenhuma configuração salva encontrada.[/yellow]")

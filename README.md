@@ -24,8 +24,11 @@ O **PixCore** foi projetado para ser simples de usar, mas poderoso o suficiente 
     - Adicione um logo customizado no centro do QR Code.
     - Personalize as cores do QR Code.
     - Inclua campos opcionais como CEP, dados em outro idioma e método de iniciação (QR estático/dinâmico).
-- **Zero Dependências Externas (Exceto Pillow e qrcode):** Leve e fácil de integrar em qualquer projeto.
 - **Totalmente Testada:** Cobertura de testes para garantir a confiabilidade na geração dos códigos.
+- **Interface de Linha de Comando (CLI)**: Utilize todas as funcionalidades diretamente do seu terminal, sem escrever código Python.
+- **Decodificação de Payload**: Analise e valide uma string "Copia e Cola" existente para inspecionar seus dados.
+- **Geração em Lote via CSV**: Crie múltiplos QR Codes a partir de um arquivo CSV, ideal para cobranças em massa.
+- **Gerenciamento de Configurações**: Salve seus dados padrão (nome, cidade, chave) para agilizar o uso da CLI.
 
 ---
 
@@ -36,12 +39,14 @@ Você pode instalar o PixCore diretamente do PyPI:
 ```bash
 pip install pixcore
 ```
-## Guia de Uso Rápido
+## Uso como Biblioteca Python
 
 Usar o PixCore é um processo de apenas dois passos:
 
 1. Crie uma instância de PixData com as informações do recebedor.
 2. Use um objeto Pix para gerar o payload ou o QR Code.
+
+A biblioteca utiliza um sistema de exceções customizadas (ex: ChavePixInvalidaError, GeracaoPayloadError) para permitir um tratamento de erros preciso e robusto em sua aplicação.
 
 ### Exemplo 1: Gerando um QR Code com Valor e Logo
 
@@ -91,6 +96,68 @@ dados_doacao = PixData(
 pix_doacao = Pix(dados_doacao)
 pix_doacao.save_qrcode("qr_code_doacao.png")
 ```
+---
+
+## Uso via Linha de Comando (CLI)
+
+O PixCore também é uma poderosa ferramenta de linha de comando que permite gerar QR Codes e payloads sem precisar escrever nenhum código.
+
+### Comandos Principais
+
+#### 1. Gerar um QR Code e salvar em arquivo
+
+Use o comando qrcode com a opção -o (output) para salvar a imagem.
+
+```Bash
+pixcore qrcode -k "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d" \
+               -n "Empresa Exemplo LTDA" \
+               -c "SAO PAULO" \
+               -a 99.90 \
+               --txid "PedidoXPTO123" \
+               -o "meu_pix_qr.png"
+```
+- **Dica**: Se você omitir a opção `-o`, o QR Code será exibido no visualizador de imagens padrão do seu sistema.
+
+#### 2. Gerar apenas o payload "Copia e Cola"
+
+Use o comando payload para obter a string que pode ser usada em aplicativos de banco.
+```Bash
+pixcore payload -k "seu-email@exemplo.com" -n "Seu Nome" -c "SUA CIDADE" -a 19.99
+```
+
+#### 3. Decodificar um código Pix existente
+
+Com o comando decode, você pode validar um payload e ver seus dados de forma organizada.
+
+```Bash
+pixcore decode "00020126580014br.gov.bcb.pix0136a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d520400005303986540599.905802BR5918Empresa Exemplo LTDA6009SAO PAULO62150511Pedido1236304ABCD"
+```
+
+#### 4. Gerar QR Codes em Lote a partir de um CSV
+
+O comando lote processa um arquivo CSV e gera um QR Code para cada linha. O CSV deve conter as colunas valor e txid.
+
+```Bash
+# Exemplo de conteúdo do arquivo 'cobrancas.csv':
+# valor,txid
+# 10.50,cliente001
+# 25.00,cliente002
+
+pixcore lote "cobrancas.csv" "qrcodes_gerados/" --name "Minha Empresa" --key "meu-cnpj" --city "CIDADE"
+```
+
+#### 5. Configurar valores padrão
+
+Para evitar digitar seu nome, cidade ou chave Pix toda vez, use o comando config set.
+
+```Bash
+pixcore config set name "Empresa Exemplo LTDA"
+pixcore config set city "SAO PAULO"
+pixcore config set key "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"
+```
+
+- Para ver as configurações salvas, use `pixcore config show`.
+
 ---
 
 ## 📚 Documentação

@@ -15,27 +15,27 @@ class PixData:
     e integridade dos dados.
 
     Attributes:
-        recebedor_nome (str): Nome do recebedor/comerciante (até 25 caracteres).
-        recebedor_cidade (str): Cidade do recebedor/comerciante (até 15 caracteres).
+        recebedor_nome (str): Nome do recebedor/comerciante. Deve ter entre 3 e 25 bytes.
+        recebedor_cidade (str): Cidade do recebedor/comerciante. Deve ter entre 3 e 15 bytes.
         pix_key (str): Chave Pix do recebedor (e-mail, CPF/CNPJ, celular ou chave aleatória). Máximo de 77 caracteres.
-        valor (Optional[float]): O valor da transação. Se for `None`, o QR Code será gerado sem valor fixo,
+        valor (Optional[float]): O valor da transação. Se for `None` ou `0`, o QR Code será gerado com valor aberto,
                                  permitindo que o pagador insira o valor.
-        transacao_id (str): Identificador da transação (TXID). Deve ter entre 1 e 25 caracteres alfanuméricos.
-                            O padrão '***' indica que não é utilizado.
-        ponto_iniciacao_metodo (Optional[str]): Define se o QR Code é estático ('12') ou dinâmico ('11').
+        transacao_id (str): Identificador da transação (TXID). Deve ser alfanumérico com até 25 caracteres.
+                            O padrão '***' indica que não é utilizado um TXID específico.
+        ponto_iniciacao_metodo (Optional[str]): Define se o QR Code é estático ('11') ou dinâmico ('12').
                                                 Se `None`, o campo não é incluído no payload.
-        receptor_categoria_code (str): Código da categoria do comerciante ("Merchant Category Code" - MCC).
-                                       Padrão: "0000".
-        recebedor_cep (Optional[str]): CEP do comerciante, deve conter 8 dígitos.
+        receptor_categoria_code (str): Código da Categoria do Comerciante (MCC). Padrão: "0000".
+        recebedor_cep (Optional[str]): CEP do comerciante. Deve conter exatamente 8 dígitos numéricos.
         info_adicional (Optional[str]): Campo de texto livre para informações adicionais (não usado diretamente
-                                        na geração padrão do BR Code, mas pode ser útil para o sistema).
-        idioma_preferencia (Optional[str]): Idioma para dados alternativos (ex: "PT").
+                                        na geração padrão do BR Code, mas útil para o sistema).
+        idioma_preferencia (Optional[str]): Idioma para dados alternativos (ex: "pt_BR").
         recebedor_nome_alt (Optional[str]): Nome alternativo do recebedor (em outro idioma).
         recebedor_cidade_alt (Optional[str]): Cidade alternativa do recebedor (em outro idioma).
 
     Raises:
-        ValueError: Se qualquer um dos campos obrigatórios não atender às regras
-                    de validação (ex: comprimento, formato).
+        exceptions.GeracaoPayloadError: Se qualquer um dos campos não atender às regras
+                                        de validação (ex: comprimento, formato).
+        exceptions.ChavePixInvalidaError: Se o formato da chave Pix não for reconhecido como válido.
 
     Examples:
         Criando uma instância válida de PixData:
@@ -46,19 +46,6 @@ class PixData:
         ...     valor=10.50,
         ...     transacao_id="TXID12345"
         ... )
-        >>> print(dados_validos.recebedor_nome)
-        EMPRESA MODELO
-
-        Tentando criar uma instância com dados inválidos:
-        >>> try:
-        ...     dados_invalidos = PixData(
-        ...         recebedor_nome="NOME EXTREMAMENTE LONGO QUE EXCEDE O LIMITE",
-        ...         recebedor_cidade="SAO PAULO",
-        ...         pix_key="chave-pix"
-        ...     )
-        ... except ValueError as e:
-        ...     print(e)
-        O nome do recebedor (recebedor_nome) é obrigatório e deve ter até 25 bytes.
     """
 
     recebedor_nome: str
@@ -75,7 +62,12 @@ class PixData:
     recebedor_cidade_alt: Optional[str] = None
 
     def __post_init__(self):
-        
+        """
+        Executa a validação dos dados após a inicialização do objeto.
+
+        Este método é chamado automaticamente pelo dataclass e centraliza todas
+        as regras de negócio para garantir a integridade dos dados do PIX.
+        """
         if not self.recebedor_nome or len(self.recebedor_nome.encode('utf-8')) > 25 or len(self.recebedor_nome) < 3:
             raise exceptions.GeracaoPayloadError(campo='recebedor_nome', motivo="O nome do recebedor (recebedor_nome) é obrigatório e deve ter entre 3 e 25 bytes.")
             
@@ -98,8 +90,13 @@ class PixData:
         
     def tipo_chave(self) -> str:
         """
-        Identifica o tipo da chave Pix testando-a contra validadores
-        na ordem de maior especificidade para a de menor.
+        Identifica o tipo da chave Pix com base em seu formato.
+
+        A verificação é feita em uma ordem específica para evitar falsos positivos
+        (ex: um CPF ser confundido com um telefone).
+
+        Returns:
+            str: O tipo da chave (ex: "CPF", "Email", "Tipo Desconhecido").
         """
         chave = self.pix_key
 
